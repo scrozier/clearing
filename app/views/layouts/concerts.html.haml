@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+%html
+  = render '/document_header'
+  %body
+    = render '/top_nav'
+    %div.container
+      .row
+        .span5.columns
+          %ul.pills
+            %li{:style => 'display:block; clear:both'}
+              = link_to 'Introduction to the season', concerts_intro_path
+            %li{:style => 'display:block; clear:both'}
+              = link_to 'Peter Mayer', concert_path(:concert_name => 'mayer_2011')
+            %li{:style => 'display:block; clear:both'}
+              = link_to 'Masterwork Concert', concert_path(:concert_name => 'memorial_2011')
+            %li{:style => 'display:block; clear:both'}
+              = link_to 'Helen and Drew', concert_path(:concert_name => 'helen_2011')
+            %li{:style => 'display:block; clear:both'}
+              = link_to 'UNT Latin Jazz', concert_path(:concert_name => 'latin_2011')
+        .span11.columns
+          = yield

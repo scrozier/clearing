@@ -1,4 +1,11 @@
 Clearing::Application.routes.draw do
+  
+  root :to => 'main#home'
+  match 'about' => 'main#about', :as => :about
+  
+  match 'concerts/intro' => 'concerts#intro', :as => :concerts_intro
+  match 'concerts/:concert_name' => 'concerts#show', :as => :concert
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
