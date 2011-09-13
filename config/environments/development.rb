@@ -24,3 +24,8 @@ Clearing::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 end
 
+# make Pry our Rails console
+silence_warnings do
+  require 'pry'
+  IRB = Pry
+end

@@ -4,7 +4,7 @@ class ConcertsController < ApplicationController
   end
   
   def show
-    @concert_insert = params[:concert_name]
+    @concert = Concert.where(:ident_string => params[:ident_string]).first
   end
   
 end

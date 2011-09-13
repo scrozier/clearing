@@ -2,7 +2,7 @@
 %html
   = render '/document_header'
   %body
-    = render '/top_nav'
+    = render '/top_nav', :nav_list => 'application'
     %div.container
       .row
         .span5.columns
@@ -10,12 +10,12 @@
             %li{:style => 'display:block; clear:both'}
               = link_to 'Introduction to the season', concerts_intro_path
             %li{:style => 'display:block; clear:both'}
-              = link_to 'Peter Mayer', concert_path(:concert_name => 'mayer_2011')
+              = link_to 'Peter Mayer', concert_path(:ident_string => 'mayer_2011')
             %li{:style => 'display:block; clear:both'}
-              = link_to 'Masterwork Concert', concert_path(:concert_name => 'memorial_2011')
+              = link_to 'Masterwork Concert', concert_path(:ident_string => 'memorial_2011')
             %li{:style => 'display:block; clear:both'}
-              = link_to 'Helen and Drew', concert_path(:concert_name => 'helen_2011')
+              = link_to 'Helen and Drew', concert_path(:ident_string => 'helen_2011')
             %li{:style => 'display:block; clear:both'}
-              = link_to 'UNT Latin Jazz', concert_path(:concert_name => 'latin_2011')
+              = link_to 'UNT Latin Jazz', concert_path(:ident_string => 'latin_2011')
         .span11.columns
           = yield

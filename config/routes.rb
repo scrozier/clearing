@@ -4,7 +4,12 @@ Clearing::Application.routes.draw do
   match 'about' => 'main#about', :as => :about
   
   match 'concerts/intro' => 'concerts#intro', :as => :concerts_intro
-  match 'concerts/:concert_name' => 'concerts#show', :as => :concert
+  match 'concerts/:ident_string' => 'concerts#show', :as => :concert
+  
+  match 'reserve_tickets' => 'tickets#reserve', :as => :reserve_tickets
+  
+  match 'admin' => 'admin#menu', :as => :admin
+  match 'admin/:action', :controller => 'admin'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
