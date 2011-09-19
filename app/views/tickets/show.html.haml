@@ -1,28 +1,3 @@
 .row
   .span10.offset3
     %h1= @concert.name
-    %h2= pretty_date_time(@concert.date_and_time)
-    = form_tag reserve_tickets_path do
-      = hidden_field_tag :concert_id, @concert.id
-      %fieldset
-        %legend Ticket reservation form
-        %p
-          (Need more than
-          = configurator :ticket_limit_per_person
-          tickets? Please
-          = mail_to 'steve@crozier.com', 'contact us'
-          for availability and special arrangements.)
-        %p All fields are required.
-        %p We will not use or disclose your email address for any purpose other than the concert series.
-        = app_text_field_tag :first_name
-        = app_text_field_tag :last_name
-        = app_text_field_tag :email
-        = app_text_field_tag :email_confirmation, 'Re-type email'
-        .clearfix
-          = label_tag :number_of_tickets, 'Number of tickets'
-          .input
-            - for num in 1..(configurator :ticket_limit_per_person)
-              = radio_button_tag :number_of_tickets, num
-              = num.to_s
-        .actions
-          = submit_tag 'Request tickets', :class => 'btn primary'
