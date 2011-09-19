@@ -13,10 +13,10 @@
 <% @concerts.each do |concert| %>
   <tr>
     <td><%= concert.name %></td>
-    <td><%= concert.data_and_time %></td>
-    <td><%= concert.id_string %></td>
+    <td><%= concert.date_and_time %></td>
+    <td><%= concert.ident_string %></td>
     <td><%= link_to 'Show', concert %></td>
-    <td><%= link_to 'Edit', edit_concert_path(concert) %></td>
+    <td><%= link_to 'Edit', edit_admin_concert_path(concert) %></td>
     <td><%= link_to 'Destroy', concert, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
@@ -24,4 +24,4 @@
 
 <br />
 
-<%= link_to 'New Concert', new_concert_path %>
+<%= link_to 'New Concert', new_admin_concert_path %>

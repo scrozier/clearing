@@ -1,0 +1,3 @@
+Dear <%= @reservation.patron.first_name %>,
+
+We're glad you will be joining us to see <%= @reservation.concert.name %> at <%= pretty_date_time(@reservation.concert.date_and_time) %>.

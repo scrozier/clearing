@@ -12,4 +12,8 @@ module ApplicationHelper
     image_tag 'logo-dark-reduced-horizontal.gif', :style => 'float:left'
   end
   
+  def pretty_date_time(dt)
+    dt.strftime('%l:%M%P, %B %d, %Y')
+  end
+  
 end

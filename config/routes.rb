@@ -3,10 +3,16 @@ Clearing::Application.routes.draw do
   root :to => 'main#home'
   match 'about' => 'main#about', :as => :about
   
+  namespace :admin do
+    resources :concerts
+  end
+  
   match 'concerts/intro' => 'concerts#intro', :as => :concerts_intro
   match 'concerts/:ident_string' => 'concerts#show', :as => :concert
   
+  match 'show_ticket_form/:ident_string' => 'tickets#show', :as => :show_ticket_form
   match 'reserve_tickets' => 'tickets#reserve', :as => :reserve_tickets
+  match 'ticket_success'  => 'tickets#success', :as => :ticket_success
   
   match 'admin' => 'admin#menu', :as => :admin
   match 'admin/:action', :controller => 'admin'

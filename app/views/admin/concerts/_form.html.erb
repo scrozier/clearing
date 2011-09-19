@@ -11,19 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :data_and_time %><br />
-    <%= f.datetime_select :data_and_time %>
-  </div>
-  <div class="field">
-    <%= f.label :id_string %><br />
-    <%= f.text_field :id_string %>
-  </div>
+  <%= app_text_field_tag :name %>
+  <%= app_text_field_tag :date_and_time %>
+  <%= app_text_field_tag :ident_string %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

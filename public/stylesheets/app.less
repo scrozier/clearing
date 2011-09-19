@@ -1,3 +1,5 @@
+@import 'bootstrap.less';
+
 /* --- Bootstrap overrides --- */
 
 .topbar {
@@ -15,8 +17,8 @@ h2 {
 
 /* --- end of Bootstrap overrides --- */
 
-.shadow {
-	padding: 20px;
+.shadow, .home-concert {
+	padding: 14px;
 	border: 1px solid #f0f0f0;
 	border-bottom: 2px solid #ccc;
 	-webkit-border-radius: 5px;
@@ -30,4 +32,49 @@ h2 {
 
 .subnav {
 	margin-left:1.0em;
+}
+
+ul.pills.concert-nav li {
+
+	margin-bottom:1.0em;
+
+	a {
+		line-height:1.2em;
+		font-size:1.5em;
+	}
+	
+	span.concert-date {
+		color:gray;
+		font-size:0.75em;
+	}
+}
+
+.home-concert {
+	height:35em;
+	margin-bottom:1.0em;
+	h1 {
+		font-size:1.8em;
+		line-height:1.0em;
+	}
+	h2 {
+		font-size:1.0em;
+		color:@green;
+	}
+	h3 {
+		font-size:1.0em;
+		line-height:inherit;
+	}
+	.artist-graphic {
+		position:relative;
+		left:-14px;
+	}
+	.tickets {
+		text-align:center;
+		margin:1.0em;
+	}
+
+}
+
+.current {
+	background-color:@yellow;
 }

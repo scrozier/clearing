@@ -1,10 +1,11 @@
-.topbar-wrapper
-  .topbar{:style => 'height:auto; font-size:inherit; line-height:inherit'}
-    .fill
-      .container
-        = logo_image_for_header
-        = render "/layouts/#{nav_list}_nav"
-      %div{:style => 'text-align:center'}
-        = image_tag 'clearing2-header.jpg', :style => 'height:79px; width:1920px'
-%div{:style => 'clear:both; height:5.0em'}
+.topbar{:style => 'z-index:1'}
+  .topbar-inner
+    .container
+      = logo_image_for_header
+      = render "/layouts/#{nav_list}_nav"
+.masthead
+  .inner
+    %div{:style => 'position:fixed; top:47px; background: transparent url(/images/clearing2-header.jpg) center center no-repeat; clear:both; height:79px; width:100%; z-index:1'}
+      &nbsp;
+%div{:style => 'clear:both; height:11.0em'}
   %p &nbsp;
