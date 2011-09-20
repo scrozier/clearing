@@ -2368,6 +2368,9 @@ h2 {
   line-height: 1.0em;
   margin-bottom: 0.5em;
 }
+.alert-message div {
+  line-height: inherit;
+}
 /* --- end of Bootstrap overrides --- */
 .shadow, .home-concert {
   padding: 14px;
