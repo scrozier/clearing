@@ -5,5 +5,9 @@ class ApplicationController < ActionController::Base
   def configurator(key)
     Clearing::Application.config.application[key]
   end
+  
+  def object_errors(object)
+    ' ' + object.errors.full_messages.join('. ') + '.'
+  end
 
 end

@@ -1,5 +1,7 @@
 .row
   .span10.offset3
+    .alert-message.error
+      = display_flash
     %h1= @concert.name
     %h2= pretty_date_time(@concert.date_and_time)
     = form_tag reserve_tickets_path do

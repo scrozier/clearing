@@ -18,13 +18,13 @@ class TicketsController < ApplicationController
         )
       unless patron.valid?
         flash[:error] = "There was a problem with what you entered." + object_errors(patron)
-        redirect_to concert_url(:ident_string => concert.ident_string)
+        redirect_to show_ticket_form_url(:ident_string => concert.ident_string) and return
       end
     end
     
     unless params[:number_of_tickets]
       flash[:error] = 'Please select the number of tickets you want to reserve.'
-      redirect_to concert_url(:ident_string => concert.ident_string)
+      redirect_to show_ticket_form_url(:ident_string => concert.ident_string) and return
     end
     number_of_tickets = params[:number_of_tickets].to_i
     
@@ -37,9 +37,10 @@ class TicketsController < ApplicationController
       )
     unless @reservation
       flash[:error] = 'There was a problem reserving your tickets. ' + contact_us
+      redirect_to show_ticket_form_url(:ident_string => concert.ident_string) and return
     end
     Notifier.tickets(@reservation, unique_token).deliver
-    render :action => :ticket_success
+    render :action => :ticket_success and return
     
   end
   
