@@ -1,0 +1,24 @@
+.row
+  .span6.offset5{:style => 'margin-bottom:1.0em'}
+    .printable-ticket{:style => 'position:relative'}
+      %div
+        = image_tag 'ticket.gif'
+      %div{:style => 'position:absolute; top:0; z-index:0; width:90%'}
+        .ticket-id
+          %p= @reservation.concert.name
+          %p= pretty_date_time(@reservation.concert.date_and_time)
+          %p= @reservation.unique_token
+        .ticket-body
+          %h1= @reservation.concert.name
+          %h2= pretty_date(@reservation.concert.date_and_time)
+          %h2= pretty_time(@reservation.concert.date_and_time)
+          %h1{:style => 'margin-top:3.0em'}
+            Admit:
+            = @reservation.number_of_tickets
+          %p{:style => 'margin-top:12.0em'}
+            4015 Normandy Ave<br />
+            Dallas TX 75205
+          %p info@concertsintheclearing.org      
+          %p General admission. Seats are held until 10 minutes before concert time.
+          %p Please contact us if you will be unable to use these tickets, so that your seats may be used by others.
+  .span5

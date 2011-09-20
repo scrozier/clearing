@@ -2421,3 +2421,71 @@ ul.pills.concert-nav li span.concert-date {
 .current {
   background-color: #ffc40d;
 }
+.printable-ticket {
+  margin-left: -20px;
+  margin-bottom: 0;
+  zoom: 1;
+}
+.printable-ticket:before, .printable-ticket:after {
+  display: table;
+  content: "";
+  zoom: 1;
+  *display: inline;
+}
+.printable-ticket:after {
+  clear: both;
+}
+.printable-ticket li {
+  display: inline;
+}
+.printable-ticket a {
+  float: left;
+  padding: 4px;
+  margin: 0 0 20px 20px;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.printable-ticket a img {
+  display: block;
+}
+.printable-ticket a:hover {
+  border-color: #0069d6;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+.printable-ticket img {
+  margin: 0;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  display: block;
+}
+.printable-ticket .ticket-id {
+  margin-top: 0.5em;
+  text-align: center;
+  font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+.printable-ticket .ticket-id p {
+  font-size: 0.9em;
+  line-height: 0.6em;
+}
+.printable-ticket .ticket-body {
+  margin-top: 3.0em;
+  margin-left: 6.0em;
+}
+.printable-ticket .ticket-body h1,
+.printable-ticket .ticket-body h2,
+.printable-ticket .ticket-body h3,
+.printable-ticket .ticket-body p {
+  color: white;
+}

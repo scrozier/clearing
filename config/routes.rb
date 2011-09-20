@@ -13,6 +13,7 @@ Clearing::Application.routes.draw do
   match 'show_ticket_form/:ident_string' => 'tickets#show', :as => :show_ticket_form
   match 'reserve_tickets' => 'tickets#reserve', :as => :reserve_tickets
   match 'ticket_success'  => 'tickets#success', :as => :ticket_success
+  match 'print_tickets/:unique_token'   => 'tickets#print',   :as => :print_tickets
   
   match 'admin' => 'admin#menu', :as => :admin
   match 'admin/:action', :controller => 'admin'

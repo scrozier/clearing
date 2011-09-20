@@ -29,19 +29,26 @@ class TicketsController < ApplicationController
     number_of_tickets = params[:number_of_tickets].to_i
     
     # have the (new or existing) patron record, create the reservation
+    unique_token = Digest::SHA1.hexdigest Time.now.to_s
     @reservation = patron.reservations.create(
       :concert_id => concert.id,
-      :number_of_tickets => params[:number_of_tickets]
+      :number_of_tickets => params[:number_of_tickets],
+      :unique_token => unique_token
       )
     unless @reservation
       flash[:error] = 'There was a problem reserving your tickets. ' + contact_us
     end
-    Notifier.tickets(@reservation).deliver
+    Notifier.tickets(@reservation, unique_token).deliver
     render :action => :ticket_success
     
   end
   
   def ticket_success
+  end
+  
+  def print
+    @reservation = Reservation.where(:unique_token => params[:unique_token]).first
+    raise 'could not find reservation' unless @reservation
   end
   
 end

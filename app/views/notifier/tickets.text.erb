@@ -1,0 +1,24 @@
+Dear <%= @reservation.patron.first_name %>,
+
+We're glad you will be joining us to see <%= @reservation.concert.name %> at <%= pretty_date_time(@reservation.concert.date_and_time) %>.
+
+TICKETS
+
+Choose your ticket delivery method:
+
+<%= link_to 'PRINT', print_tickets_url(:unique_token => @unique_token) %> your tickets at home.
+
+Have your tickets emailed to your SMART PHONE.
+
+Pick up your tickets at WILL CALL.
+
+CONCERT LOCATION
+
+4015 Normandy Ave
+Dallas TX 75205
+
+We are located at the First Unitarian Church of Dallas, about a block north of Mockingbird on Preston Rd, immediately south of the Park Cities YMCA.
+
+CANCELLATIONS
+
+If you cannot attend the concert, please click here to cancel your ticket reservation as soon as possible, so that some one else can have your reserved seat.

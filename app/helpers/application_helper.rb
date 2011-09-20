@@ -13,7 +13,15 @@ module ApplicationHelper
   end
   
   def pretty_date_time(dt)
-    dt.strftime('%l:%M%P, %B %d, %Y')
+    dt.strftime('%l:%M%P, %B %d, %Y').lstrip
+  end
+  
+  def pretty_date(dt)
+    dt.strftime('%B %d, %Y').lstrip
+  end
+  
+  def pretty_time(dt)
+    dt.strftime('%l:%M%P').lstrip
   end
   
 end

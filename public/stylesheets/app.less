@@ -78,3 +78,30 @@ ul.pills.concert-nav li {
 .current {
 	background-color:@yellow;
 }
+
+.printable-ticket {
+	.media-grid;
+	img {
+    margin:0;
+    border: 1px solid #ddd;
+    .border-radius(4px);
+    .box-shadow(0 1px 1px rgba(0,0,0,.075));
+     display: block;
+	}
+	.ticket-id {
+		margin-top:0.5em;
+		text-align:center;
+		font-family: Monaco, Andale Mono, Courier New, monospace;
+		p {
+			font-size:0.9em;
+			line-height:0.6em;
+		}
+	}
+	.ticket-body {
+		margin-top:3.0em;
+		margin-left:6.0em;
+		h1, h2, h3, p {
+			color:white;
+		}
+	}
+}
