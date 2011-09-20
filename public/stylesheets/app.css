@@ -2489,6 +2489,10 @@ ul.pills.concert-nav li span.concert-date {
 .printable-ticket .ticket-body h1,
 .printable-ticket .ticket-body h2,
 .printable-ticket .ticket-body h3,
+.printable-ticket .ticket-body h4,
 .printable-ticket .ticket-body p {
   color: white;
+}
+.printable-ticket .ticket-body h4 {
+  padding: 0;
 }

@@ -13,9 +13,11 @@
           %h2= pretty_date(@reservation.concert.date_and_time)
           %h2= pretty_time(@reservation.concert.date_and_time)
           %h1{:style => 'margin-top:3.0em'}
-            Admit:
+            Admit
             = @reservation.number_of_tickets
-          %p{:style => 'margin-top:12.0em'}
+          %p purchased by
+          %h4= "#{@reservation.patron.first_name} #{@reservation.patron.last_name}"
+          %p{:style => 'margin-top:7.0em'}
             4015 Normandy Ave<br />
             Dallas TX 75205
           %p info@concertsintheclearing.org      
