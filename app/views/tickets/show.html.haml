@@ -8,7 +8,8 @@
     = form_tag reserve_tickets_path do
       = hidden_field_tag :concert_id, @concert.id
       %fieldset
-        %legend Ticket reservation form
+        %legend Ticket reservation
+        %p Tickets are free, and we welcome donations if you are able.
         %p
           (Need more than
           = configurator :ticket_limit_per_person
@@ -17,15 +18,69 @@
           for availability and special arrangements.)
         %p All fields are required.
         %p We will not use or disclose your email address for any purpose other than the concert series.
-        = app_text_field_tag :first_name
-        = app_text_field_tag :last_name
-        = app_text_field_tag :email
-        = app_text_field_tag :email_confirmation, 'Re-type email'
+        = app_text_field_tag :first_name, nil, 3
+        = app_text_field_tag :last_name, nil, 3
+        = app_text_field_tag :email, nil, 6
+        = app_text_field_tag :email_confirmation, 'Re-type email', 6
         .clearfix
           = label_tag :number_of_tickets, 'Number of tickets'
           .input
             - for num in 1..(configurator :ticket_limit_per_person)
-              = radio_button_tag :number_of_tickets, num
-              = num.to_s
+              %span{:style => 'display:inline-block; width:3.0em'}
+                = radio_button_tag :number_of_tickets, num
+                = num.to_s
+        .alert-message.news
+          %div{:style => 'font-size:1.2em'}
+            = radio_button_tag :donation, true
+            Yes, I would like to make a donation to support great music in Dallas.
+          %div
+            = radio_button_tag :donation, false
+            No, not at this time.
+          #donation
+            %legend Donation information
+            .clearfix
+              = label_tag :credit_card_type
+              .input
+                = select_tag :credit_card_type, options_for_select([[], ["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]]), :class => 'span3'
+              = app_text_field_tag :credit_card_number, nil, 3
+              = label_tag :credit_card_expires_year, 'Card expiration'
+              .input
+                = select_tag :credit_card_expires_month, options_for_card_expires_month, :class => 'span3'
+                = select_tag :credit_card_expires_year, options_for_card_expires_year, :class => 'span2'
+              = app_text_field_tag :credit_card_verfication, 'Card verification value (CVV)', 1
+              = label_tag :credit_card_first_name, 'Name on card (first, last)'
+              .input
+                = text_field_tag :credit_card_first_name, nil, :class => "span3"
+                = text_field_tag :credit_card_last_name, nil, :class => "span3"
         .actions
           = submit_tag 'Request tickets', :class => 'btn primary'
+
+:javascript
+  $(document).ready(function(){
+
+    // Donation form; show/hide.
+
+    $('#donation').show();
+
+    $('input#donation_true').click(function(){
+      $('div#donation').show('slow');
+    })
+
+    $('input#donation_false').click(function(){
+      $('div#donation').hide('slow');
+    })
+    
+    // Fill in names on donation form, as appropriate
+    
+    $('input[name=first_name]').blur(function(){
+      if ($('input[name=credit_card_first_name]').val() == '') {
+        $('input[name=credit_card_first_name]').val($(this).val());
+      }
+    })
+    $('input[name=last_name]').blur(function(){
+      if ($('input[name=credit_card_last_name]').val() == '') {
+        $('input[name=credit_card_last_name]').val($(this).val());
+      }
+    })
+
+  })
