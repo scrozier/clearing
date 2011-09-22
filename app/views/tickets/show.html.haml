@@ -31,7 +31,7 @@
                 = num.to_s
         .alert-message.news
           %div{:style => 'font-size:1.2em'}
-            = radio_button_tag :donation, true
+            = radio_button_tag :donation, true, true
             Yes, I would like to make a donation to support great music in Dallas.
           %div
             = radio_button_tag :donation, false
@@ -47,11 +47,13 @@
               .input
                 = select_tag :credit_card_expires_month, options_for_card_expires_month, :class => 'span3'
                 = select_tag :credit_card_expires_year, options_for_card_expires_year, :class => 'span2'
-              = app_text_field_tag :credit_card_verfication, 'Card verification value (CVV)', 1
+              = app_text_field_tag :credit_card_verification, 'Card verification value (CVV)', 1
               = label_tag :credit_card_first_name, 'Name on card (first, last)'
               .input
                 = text_field_tag :credit_card_first_name, nil, :class => "span3"
                 = text_field_tag :credit_card_last_name, nil, :class => "span3"
+              .clearfix
+              = app_text_field_tag :amount, nil, 2
         .actions
           = submit_tag 'Request tickets', :class => 'btn primary'
 

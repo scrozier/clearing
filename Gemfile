@@ -5,6 +5,7 @@ gem 'sqlite3'
 gem 'haml'
 gem 'pry', :group => :development
 gem 'less', :group => :development
+gem 'activemerchant', :require => 'active_merchant'
 
 # Use unicorn as the web server
 # gem 'unicorn'

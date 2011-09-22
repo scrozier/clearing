@@ -3,6 +3,7 @@ class AddDonations < ActiveRecord::Migration
     create_table :donations, :force => true do |t|
       t.integer :patron_id
       t.integer :concert_id
+      t.decimal :amount, :precision => 8, :scale => 2
       t.string :credit_card_ends_with
       t.string :transaction_code
       t.timestamps

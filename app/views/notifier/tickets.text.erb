@@ -2,15 +2,19 @@ Dear <%= @reservation.patron.first_name %>,
 
 We're glad you will be joining us to see <%= @reservation.concert.name %> at <%= pretty_date_time(@reservation.concert.date_and_time) %>.
 
+<% if @donation %>
+Thank you very much for your donation of $<%= @donation.amount %> to help us fund these concerts. You may want to save this email or make note of the transaction ID for your credit card charge: <%= @donation.transaction_code %>.
+
+<% end %>
 TICKETS
 
 Choose your ticket delivery method:
 
-<%= link_to 'PRINT', print_tickets_url(:unique_token => @unique_token) %> your tickets at home.
+PRINT your tickets at home: click on this link, or paste into your browser. (Be sure to get the entire line, including the random letters and numbers.)
 
-Have your tickets emailed to your SMART PHONE.
+<%= print_tickets_url(:unique_token => @unique_token).gsub(/http:\/\//, '') %> 
 
-Pick up your tickets at WILL CALL.
+Pick up your tickets at WILL CALL. If you cannot print your ticket, just arrive at the concert at least 15 minutes before the show and check in at the will-call table.
 
 CONCERT LOCATION
 

@@ -11,12 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110920022041) do
+ActiveRecord::Schema.define(:version => 20110921165821) do
 
   create_table "concerts", :force => true do |t|
     t.string   "name"
     t.datetime "date_and_time"
     t.string   "ident_string"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "donations", :force => true do |t|
+    t.integer  "patron_id"
+    t.integer  "concert_id"
+    t.decimal  "amount",                :precision => 8, :scale => 2
+    t.string   "credit_card_ends_with"
+    t.string   "transaction_code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
