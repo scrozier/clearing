@@ -89,7 +89,11 @@ class TicketsController < ApplicationController
   
   def print
     @reservation = Reservation.where(:unique_token => params[:unique_token]).first
-    raise 'could not find reservation' unless @reservation
+    unless @reservation
+      flash[:error] = 'Could not locate your ticket. ' + contact_us
+      redirect_to root_path
+    end
+
   end
   
 end

@@ -1,6 +1,9 @@
 - if Date.today > Date.new(2011, 9, 15) && Date.today < Date.new(2011, 10, 15)
   .row
     .span16.columns
+      - unless flash.empty?
+        .alert-message.error
+          = display_flash
       .alert-message.news
         %p
           %span.label.success EXTRA

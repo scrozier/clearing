@@ -37,11 +37,11 @@ module ApplicationHelper
     flash_types = [:error, :warning, :notice, :success]
 
     messages = ((flash_types & flash.keys).collect do |key|
-      content_tag(:div, flash[key], :class => "#{key}")
+      content_tag(:div, flash[key].html_safe, :class => "#{key}")
     end.join("\n"))
     
     if messages.size > 0
-      content_tag(:div, messages.html_safe, :id => "flash").html_safe
+      content_tag(:div, messages.html_safe, :id => "flash")
     else
       ""
     end
