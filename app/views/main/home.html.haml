@@ -7,30 +7,46 @@
           Peter Mayer will hold a 2-hour guitar/songwriting workshop the morning of October 15.
           Contact
           = mail_to 'mquigley@dallasuu.org', 'Martha Quigley'
-          for more information, or to sign up. There is a $20 fee per participant.
+          for more information, or to sign up. There is a $20 fee per participant. Space is limited.
 .row
   .span4.columns
     .home-concert.current
       %h2 Saturday, October 15, 2011<br />8:00pm
       %h3 singer/songwriter
       %h1 Peter Mayer
+      .tickets
+        = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'mayer_2011')
       %p "Peter does nothing less than address the very nature of our existence." &mdash;Dale Connelly, Minnesota Public Radio
       %p "If I rocked half as hard as Peter does, I'd own the world by now." &mdash;Janis Ian
       = image_tag 'mayer-graphic-home-page.jpg', :class => 'artist-graphic'
-      .tickets
-        = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'mayer_2011')
   .span4.columns
     .home-concert
       %h2 Sunday, November 13, 2011<br />7:00pm
       %h3 choir and orchestra
       %h1 Masterworks
+      .tickets
+        <span class="label success">TICKETS AVAILABLE OCTOBER 13</span>
+      %p An evening of transcendently beautiful music of the 20th century.
+      %p Choir and orchestra perform Maurice Durufl&eacute;'s lush, Romantic <i>Requiem</i>.
+      %p The orchestra will also perform Ralph Vaughan Williams' <i>Charthouse Suite</i>.
+      = image_tag 'masterworks-graphic-home-page-white.jpg', :class => 'artist-graphic'
   .span4.columns
     .home-concert
       %h2 Saturday, March 3, 2011<br />8:00pm
       %h3 flute, marimba, and more
-      %h1 Helen Blackburn and friends
+      %h1 Helen Blackburn
+      .tickets
+        <span class="label success">TICKETS AVAILABLE FEBRUARY 3</span>
+      %p An eclectic, exciting performance by flute virtuoso Helen Blackburn, her husband, marimbist Drew Lang, and perhaps some other great musical surprises.
+      %p You'll just have to come and see.
+      = image_tag 'helen-graphic-home-page-white.jpg', :class => 'artist-graphic'
   .span4.columns
     .home-concert
       %h2 Saturday, April 14, 2011<br />8:00pm
       %h3 big band and percussion
       %h1 UNT Latin Jazz
+      .tickets
+        <span class="label success">TICKETS AVAILABLE MARCH 14</span>
+      %p End the season with exciting music from south of the border with University of North Texas' Latin Jazz Ensemble.
+      %p A "mini big band" with an exciting, expanded percussion section, this group will have the whole family salsa dancing.
+      = image_tag 'latin-graphic-home-page-white.jpg', :class => 'artist-graphic'

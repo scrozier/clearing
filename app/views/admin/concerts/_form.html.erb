@@ -1,4 +1,5 @@
-<%= form_for(@concert) do |f| %>
+<%= form_for [:admin, @concert] do |f| %>
+
   <% if @concert.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@concert.errors.count, "error") %> prohibited this concert from being saved:</h2>
@@ -11,9 +12,10 @@
     </div>
   <% end %>
 
-  <%= app_text_field_tag :name %>
-  <%= app_text_field_tag :date_and_time %>
-  <%= app_text_field_tag :ident_string %>
+  <%= app_text_field f, :name %>
+  <%= app_text_field f, :date_and_time %>
+  <%= app_text_field f, :ident_string %>
+  <%= app_text_field f, :suggested_ticket_donation %>
 
   <div class="actions">
     <%= f.submit %>

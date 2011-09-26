@@ -7,14 +7,19 @@
 
 <p>
   <b>Data and time:</b>
-  <%= @concert.data_and_time %>
+  <%= @concert.date_and_time %>
 </p>
 
 <p>
-  <b>Id string:</b>
-  <%= @concert.id_string %>
+  <b>Ident string:</b>
+  <%= @concert.ident_string %>
+</p>
+
+<p>
+  <b>Suggested ticket donation:</b>
+  <%= @concert.ident_string %>
 </p>
 
 
-<%= link_to 'Edit', edit_concert_path(@concert) %> |
-<%= link_to 'Back', concerts_path %>
+<%= link_to 'Edit', edit_admin_concert_path(@concert) %> |
+<%= link_to 'Back', admin_concerts_path %>

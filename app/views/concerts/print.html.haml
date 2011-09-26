@@ -1,27 +1,20 @@
 .row
-  .span10.offset3
-    - unless flash.empty?
-      .alert-message.error
-        = display_flash
-    %h1= @concert.name
-    %h2= pretty_date_time(@concert.date_and_time)
+  .span10
     = form_tag reserve_tickets_path do
       = hidden_field_tag :concert_id, @concert.id
       %fieldset
-        %legend Ticket reservation
-        %p Tickets are free, and we welcome donations if you are able.
-        %p
-          (Need more than
-          = configurator :ticket_limit_per_person
-          tickets? Please
-          = mail_to 'steve@crozier.com', 'contact us'
-          for availability and special arrangements.)
-        %p All fields are required.
-        %p We will not use or disclose your email address for any purpose other than the concert series.
-        = app_text_field_tag :first_name, nil, 3
-        = app_text_field_tag :last_name, nil, 3
-        = app_text_field_tag :email, nil, 6
-        = app_text_field_tag :email_confirmation, 'Re-type email', 6
+        = app_text_field_tag :first_name, nil, 5
+        = app_text_field_tag :last_name, nil, 5
+        = app_text_field_tag :email, nil, 8
+        .clearfix
+        = label_tag :credit_card_type, 'Member of First Unitarian Church?'
+        .input
+          = radio_button_tag :member, 'Yes'
+          %span{:style => 'display:inline-block; width:3.0em'}
+            Yes
+          = radio_button_tag :member, 'No'
+          No
+        .clearfix
         = label_tag :number_of_tickets, 'Number of tickets'
         .input
           - for num in 1..(configurator :ticket_limit_per_person)
@@ -30,27 +23,33 @@
               = num.to_s
         .alert-message.news{:style => 'margin-top:1.0em'}
           %div{:style => 'font-size:1.2em'}
-            = radio_button_tag :donation, true, true
+            = radio_button_tag :donation, true
             Yes, I would like to make a donation to support great music in Dallas.
           %div
             = radio_button_tag :donation, false
             No, not at this time.
           #donation
-            %legend Donation information
+            %legend Donation information (if applicable)
             .clearfix
-            = label_tag :credit_card_type
-            .input
-              = select_tag :credit_card_type, options_for_select([[], ["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]]), :class => 'span3'
-            = app_text_field_tag :credit_card_number, nil, 3
+            %div{:style => 'margin-top:1.0em; margin-bottom:1.5em'}
+              = label_tag :credit_card_type
+              .input
+                = radio_button_tag :cct, 'visa'
+                = radio_button_tag :cct, 'mc', nil, :style => 'margin-left:7.0em'
+                = radio_button_tag :cct, 'disc', nil, :style => 'margin-left:7.0em'
+            = app_text_field_tag :credit_card_number, nil, 6
             = label_tag :credit_card_expires_year, 'Card expiration'
             .input
-              = select_tag :credit_card_expires_month, options_for_card_expires_month, :class => 'span3'
-              = select_tag :credit_card_expires_year, options_for_card_expires_year, :class => 'span2'
-            = app_text_field_tag :credit_card_verification, 'Card verification value (CVV)', 1
-            = label_tag :credit_card_first_name, 'Name on card (first, last)'
+              = text_field_tag :credit_card_expires_month, nil, :class => 'span1'
+              = text_field_tag :credit_card_expires_year, nil, :class => 'span1'
+            = label_tag :credit_card_first_name, 'Name on card'
             .input
               = text_field_tag :credit_card_first_name, nil, :class => "span3"
               = text_field_tag :credit_card_last_name, nil, :class => "span3"
+            .clearfix
+            = label_tag :address
+            .input
+              = text_area_tag :address
             .clearfix
             %div{:style => 'text-align:center'}
               %p
@@ -60,6 +59,7 @@
                   per ticket)
             .clearfix
             = app_text_field_tag :amount, nil, 2
+            = app_text_field_tag :signature, nil, 6
         .actions
           = submit_tag 'Request tickets', :class => 'btn primary'
 

@@ -1,7 +1,7 @@
 .topbar{:style => 'z-index:1'}
   .topbar-inner
     .container
-      = logo_image_for_header
+      = link_to logo_image_for_header, root_path
       = render "/layouts/#{nav_list}_nav"
 .masthead
   .inner

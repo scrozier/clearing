@@ -2,6 +2,7 @@ Clearing::Application.routes.draw do
   
   root :to => 'main#home'
   match 'about' => 'main#about', :as => :about
+  match 'contact_us' => 'main#contact_us', :as => :contact_us
   
   namespace :admin do
     resources :concerts
@@ -9,6 +10,7 @@ Clearing::Application.routes.draw do
   
   match 'concerts/intro' => 'concerts#intro', :as => :concerts_intro
   match 'concerts/:ident_string' => 'concerts#show', :as => :concert
+  match 'concerts/print/:ident_string' => 'concerts#print'
   
   match 'show_ticket_form/:ident_string' => 'tickets#show', :as => :show_ticket_form
   match 'reserve_tickets' => 'tickets#reserve', :as => :reserve_tickets

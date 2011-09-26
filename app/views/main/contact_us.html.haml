@@ -1,0 +1,11 @@
+%section#home
+  .page-header
+    %h1 Contact us
+  .row
+    .span12.columns
+      %p
+        For questions or additional information,
+        = (mail_to 'info@concertsintheclearing.org', 'email us') + ','
+        or contact First Unitarian Church at 214.528.3990.
+    .span4.columns
+      = render 'logo'

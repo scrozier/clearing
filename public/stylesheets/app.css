@@ -2398,7 +2398,8 @@ ul.pills.concert-nav li span.concert-date {
   font-size: 0.75em;
 }
 .home-concert {
-  height: 35em;
+  position: relative;
+  height: 30em;
   margin-bottom: 1.0em;
 }
 .home-concert h1 {
@@ -2414,12 +2415,12 @@ ul.pills.concert-nav li span.concert-date {
   line-height: inherit;
 }
 .home-concert .artist-graphic {
-  position: relative;
-  left: -14px;
+  position: absolute;
+  left: 0;
+  top: 300px;
 }
 .home-concert .tickets {
-  text-align: center;
-  margin: 1.0em;
+  margin: -10px 0 7px 0;
 }
 .current {
   background-color: #ffc40d;

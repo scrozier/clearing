@@ -5,6 +5,7 @@
     <th>Name</th>
     <th>Data and time</th>
     <th>Id string</th>
+    <th>Suggested ticket donation</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,6 +16,7 @@
     <td><%= concert.name %></td>
     <td><%= concert.date_and_time %></td>
     <td><%= concert.ident_string %></td>
+    <td><%= concert.suggested_ticket_donation %></td>
     <td><%= link_to 'Show', concert %></td>
     <td><%= link_to 'Edit', edit_admin_concert_path(concert) %></td>
     <td><%= link_to 'Destroy', concert, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -7,4 +7,9 @@ class ConcertsController < ApplicationController
     @concert = Concert.where(:ident_string => params[:ident_string]).first
   end
   
+  def print
+    @concert = Concert.where(:ident_string => params[:ident_string]).first
+    render :layout => 'printed_form'
+  end
+  
 end
