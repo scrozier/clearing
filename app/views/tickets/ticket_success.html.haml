@@ -1,18 +1,4 @@
 .row
   .span10.offset3
     %h1 Tickets have been reserved
-    %p
-      %strong
-        = @reservation.number_of_tickets
-      tickets have been reserved for you for to see
-      %strong
-        = @reservation.concert.name
-      at
-      %strong
-        = pretty_date_time(@reservation.concert.date_and_time) + '.'
-      You will receive an email shortly (from info@concertsintheclearing.org) with a link to get your tickets, and additional instructions.
-    %h2 Venue
-    %address
-      4015 Normandy Ave<br />
-      Dallas TX 75205
-    %p We are located at the First Unitarian Church of Dallas, about a block north of Mockingbird on Preston Rd, immediately south of the Park Cities YMCA.
+    = render 'tickets_have_been_reserved'

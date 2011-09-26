@@ -5,11 +5,15 @@ class Notifier < ActionMailer::Base
   default :from => 'info@concertsintheclearing.org',
           :return_path => 'info@concertsintheclearing.org'
   
-  def tickets(reservation, unique_token, donation)
+  def tickets(reservation)
     @reservation = reservation
-    @unique_token = unique_token
-    @donation = donation
+    @unique_token = reservation.unique_token
     mail(:to => reservation.patron.email)
+  end
+
+  def donation(donation)
+    @donation = donation
+    mail(:to => @donation.patron.email)
   end
 
 end
