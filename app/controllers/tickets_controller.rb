@@ -90,6 +90,7 @@ class TicketsController < ApplicationController
     @donation = Donation.new(
       :patron_id => params[:patron_id],
       :concert_id => params[:concert_id],
+      :reservation_id => params[:reservation_id],
       :credit_card_ends_with => params[:credit_card_number][-4, 4],
       :amount => params[:amount]
       )

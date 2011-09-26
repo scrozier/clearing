@@ -4,6 +4,7 @@ class Donation < ActiveRecord::Base
   validates :patron_id, :presence => true
   
   belongs_to :concert
+  belongs_to :reservation
   
   attr_accessor :credit_card_type,
                 :credit_card_number,
@@ -15,9 +16,11 @@ class Donation < ActiveRecord::Base
                 :amount
 
   if Rails.env.production?
+    ActiveMerchant::Billing::Base.mode = :production
     LOGIN_ID =        ENV['AUTHORIZE_NET_LOGIN_ID']
     TRANSACTION_KEY = ENV['AUTHORIZE_NET_TRANSACTION_KEY']
   else
+    ActiveMerchant::Billing::Base.mode = :test
     LOGIN_ID = '44eYUR5Uy7nn'
     TRANSACTION_KEY = '24V8H5aqzgT792Hq'
   end
@@ -39,9 +42,6 @@ class Donation < ActiveRecord::Base
   #   [successful?, transaction ID (string) or error message if payment unsuccessful]
   def process_payment
 
-    # for testing
-    ActiveMerchant::Billing::Base.mode = :test
-    
     raise 'invalid credit card' unless @credit_card && @credit_card.valid?
     
     gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new(
@@ -49,10 +49,24 @@ class Donation < ActiveRecord::Base
       :password => TRANSACTION_KEY
       )
 
-    response = gateway.purchase((@amount * 100).to_i, @credit_card)
+    description = "Concerts in the Clearing"
+    if reservation
+      description += "/Tickets, #{reservation.concert.name}, FMV #{fair_market_value_of_tickets.to_dollar_amount}"
+    end
+
+    response = gateway.purchase((@amount * 100).to_i, @credit_card, :description => description)
     return [true, response.authorization] if response.success?
     return [false, response.message]
     
+  end
+
+  # Fair market value of the tickets received for a donation is the product
+  # of the number of tickets reserved and the suggested donation per ticket.
+  #
+  # Returns BigDecimal.
+  def fair_market_value_of_tickets
+    return BigDecimal.new('0.0') unless reservation && reservation.number_of_tickets
+    return BigDecimal.new(reservation.number_of_tickets.to_s) * concert.suggested_ticket_donation
   end
 
 end

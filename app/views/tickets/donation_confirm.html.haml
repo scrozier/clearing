@@ -28,6 +28,7 @@
     = form_tag process_donation_path do
       = hidden_field_tag :patron_id, @patron.id
       = hidden_field_tag :concert_id, @concert.id
+      = hidden_field_tag :reservation_id, @reservation.id
       = hidden_field_tag :credit_card_type, @donation.credit_card_type
       = hidden_field_tag :credit_card_number, @donation.credit_card_number
       = hidden_field_tag :credit_card_expiration_month, @donation.credit_card_expiration_month
