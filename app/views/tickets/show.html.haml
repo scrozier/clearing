@@ -1,3 +1,5 @@
+- @patron   ||= Patron.new
+- @donation ||= Donation.new
 .row
   .span10.offset3
     - unless flash.empty?
@@ -14,19 +16,19 @@
           (Need more than
           = configurator :ticket_limit_per_person
           tickets? Please
-          = mail_to 'steve@crozier.com', 'contact us'
+          = mail_to configurator(:contact_email), 'contact us'
           for availability and special arrangements.)
         %p All fields are required.
         %p We will not use or disclose your email address for any purpose other than the concert series.
-        = app_text_field_tag :first_name, nil, 3
-        = app_text_field_tag :last_name, nil, 3
-        = app_text_field_tag :email, nil, 6
-        = app_text_field_tag :email_confirmation, 'Re-type email', 6
+        = app_text_field_tag :first_name, nil, 3, @patron.first_name
+        = app_text_field_tag :last_name, nil, 3, @patron.last_name
+        = app_text_field_tag :email, nil, 6, (@patron.errors.on(:email) ? nil : @patron.email)
+        = app_text_field_tag :email_confirmation, 'Re-type email', 6, (@patron.errors.on(:email) ? nil : @patron.email)
         = label_tag :number_of_tickets, 'Number of tickets'
         .input
           - for num in 1..(configurator :ticket_limit_per_person)
             %span{:style => 'display:inline-block; width:3.0em'}
-              = radio_button_tag :number_of_tickets, num
+              = radio_button_tag :number_of_tickets, num, num == @number_of_tickets
               = num.to_s
         .alert-message.news{:style => 'margin-top:1.0em'}
           %div{:style => 'font-size:1.2em'}
@@ -40,17 +42,17 @@
             .clearfix
             = label_tag :credit_card_type
             .input
-              = select_tag :credit_card_type, options_for_select([[], ["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"]]), :class => 'span3'
-            = app_text_field_tag :credit_card_number, nil, 3
+              = select_tag :credit_card_type, options_for_select([[], ["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"]], @donation.credit_card_type), :class => 'span3'
+            = app_text_field_tag :credit_card_number, nil, 3, @donation.credit_card_number
             = label_tag :credit_card_expires_year, 'Card expiration'
             .input
-              = select_tag :credit_card_expires_month, options_for_card_expires_month, :class => 'span3'
-              = select_tag :credit_card_expires_year, options_for_card_expires_year, :class => 'span2'
-            = app_text_field_tag :credit_card_verification, 'Card verification value (CVV)', 1
+              = select_tag :credit_card_expiration_month, options_for_card_expiration_month(@donation.credit_card_expiration_month), :class => 'span3'
+              = select_tag :credit_card_expires_year, options_for_card_expiration_year(@donation.credit_card_expiration_year), :class => 'span2'
+            = app_text_field_tag :credit_card_verification, 'Card verification value (CVV)', 1, @donation.credit_card_verification
             = label_tag :credit_card_first_name, 'Name on card (first, last)'
             .input
-              = text_field_tag :credit_card_first_name, nil, :class => "span3"
-              = text_field_tag :credit_card_last_name, nil, :class => "span3"
+              = text_field_tag :credit_card_first_name, @donation.credit_card_first_name, :class => "span3"
+              = text_field_tag :credit_card_last_name, @donation.credit_card_last_name, :class => "span3"
             .clearfix
             %div{:style => 'text-align:center'}
               %p
@@ -59,7 +61,7 @@
                   = "$#{@concert.suggested_ticket_donation}"
                   per ticket)
             .clearfix
-            = app_text_field_tag :amount, nil, 2
+            = app_text_field_tag :amount, nil, 2, @donation.amount
         .actions
           = submit_tag 'Request tickets', :class => 'btn primary'
 

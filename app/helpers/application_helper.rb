@@ -1,9 +1,10 @@
 module ApplicationHelper
 
-  def app_text_field_tag(field_name, label=nil, span=6)
+  def app_text_field_tag(field_name, label=nil, span=6, value=nil)
     render '/helpers/text_field_tag', :field_name => field_name,
                                       :label => (label ? label : field_name.to_s.humanize),
-                                      :span => span
+                                      :span => span,
+                                      :value => value
   end
   
   def app_text_field(form_object, field_name, label=nil, span=6)
@@ -47,20 +48,20 @@ module ApplicationHelper
     end
   end
   
-  def options_for_card_expires_month
+  def options_for_card_expiration_month(selected=nil)
     option_list = []
     months = Date::MONTHNAMES.dup
     months.delete(nil)
     months.each_with_index {|name, index| option_list << [('0' + (index + 1).to_s)[-2,2] + ' - ' + name, index + 1]}
     option_list.delete(nil)
     option_list.insert(0, ['', nil])
-    options_for_select(option_list)
+    options_for_select(option_list, selected)
   end
 
-  def options_for_card_expires_year
+  def options_for_card_expiration_year(selected=nil)
     option_array = ((Date.today.year.to_s)..((Date.today.year + 10).to_s)).to_a
     option_array.insert(0, '')
-    option_list = options_for_select(option_array)
+    option_list = options_for_select(option_array, selected)
   end
   
 end
