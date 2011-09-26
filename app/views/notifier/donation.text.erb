@@ -1,3 +1,3 @@
 Dear <%= @donation.patron.first_name %>,
 
-Thank you very much for your donation of $<%= @donation.amount %> to help us fund Concerts in the Clearing. You may want to save this email or make note of the transaction ID for your credit card charge: <%= @donation.transaction_code %>.
+Thank you very much for your donation of <%= dollar_amount(@donation.amount) %> to help us fund Concerts in the Clearing. You may want to save this email or make note of the transaction ID for your credit card charge: <%= @donation.transaction_code %>.

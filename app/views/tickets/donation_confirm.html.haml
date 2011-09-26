@@ -9,7 +9,7 @@
     %table
       %tr
         %td Credit card type
-        %td= @donation.credit_card_type
+        %td= @donation.credit_card_type.upcase
       %tr
         %td Credit card number
         %td= @donation.credit_card_number
@@ -24,7 +24,7 @@
         %td= "#{@donation.credit_card_first_name} #{@donation.credit_card_last_name}"
       %tr
         %td Amount
-        %td= @donation.amount
+        %td= dollar_amount(@donation.amount)
     = form_tag process_donation_path do
       = hidden_field_tag :patron_id, @patron.id
       = hidden_field_tag :concert_id, @concert.id

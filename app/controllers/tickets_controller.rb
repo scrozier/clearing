@@ -120,12 +120,13 @@ class TicketsController < ApplicationController
   end
   
   def print
+
     @reservation = Reservation.where(:unique_token => params[:unique_token]).first
     unless @reservation
       flash[:error] = 'Could not locate your ticket. ' + contact_us
       redirect_to root_path
     end
-
+    render :layout => 'printed_ticket'
   end
   
   def process_reservation(number_of_tickets)

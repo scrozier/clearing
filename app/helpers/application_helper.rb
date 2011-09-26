@@ -64,4 +64,8 @@ module ApplicationHelper
     option_list = options_for_select(option_array, selected)
   end
   
+  def dollar_amount(amt)
+    sprintf('$%0.2f', amt)
+  end
+
 end
