@@ -40,7 +40,7 @@
             .clearfix
             = label_tag :credit_card_type
             .input
-              = select_tag :credit_card_type, options_for_select([[], ["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]]), :class => 'span3'
+              = select_tag :credit_card_type, options_for_select([[], ["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"]]), :class => 'span3'
             = app_text_field_tag :credit_card_number, nil, 3
             = label_tag :credit_card_expires_year, 'Card expiration'
             .input
