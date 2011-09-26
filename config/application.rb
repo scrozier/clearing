@@ -39,7 +39,7 @@ module Clearing
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
-    config.action_mailer.default_url_options = { :host => "clearing.heroku.com" }
+    config.action_mailer.default_url_options = { :host => "concertsintheclearing.heroku.com" }
 
   end
 end
