@@ -13,9 +13,14 @@ class Donation < ActiveRecord::Base
                 :credit_card_first_name,
                 :credit_card_last_name,
                 :amount
-                
-  LOGIN_ID = '44eYUR5Uy7nn'
-  TRANSACTION_KEY = '24V8H5aqzgT792Hq'
+
+  if Rails.env.production?
+    LOGIN_ID =        ENV['AUTHORIZE_NET_LOGIN_ID']
+    TRANSACTION_KEY = ENV['AUTHORIZE_NET_TRANSACTION_KEY']
+  else
+    LOGIN_ID = '44eYUR5Uy7nn'
+    TRANSACTION_KEY = '24V8H5aqzgT792Hq'
+  end
     
   def card_valid?
     @credit_card = ActiveMerchant::Billing::CreditCard.new(
