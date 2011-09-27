@@ -94,17 +94,31 @@
       }
     })
     
-    // Display the extended suggested donation when a number of tickets is selected
+    // Display the extended suggested donation when the page is loaded, and
+    // when a number of tickets is selected.
+    
+    show_extended_suggested_donation();
     
     $('input[id^=number_of_tickets]').click(function(){
-      var numTickets = parseInt($(this).attr('id').replace('number_of_tickets_', ''))
-      var suggestedTicketDonation = #{@concert.suggested_ticket_donation};
-      if (numTickets == 1) {
-        $('strong#suggested-donation').text('(suggested donation is $' + suggestedTicketDonation + ' per ticket)');
-      } else {
-        var suggestedDonation = numTickets * suggestedTicketDonation;
-        $('strong#suggested-donation').text('(suggested donation is $' + suggestedTicketDonation + ' per ticket, $' + suggestedDonation + ' for your ' + numTickets + ' tickets)');
-      }
+      show_extended_suggested_donation();
+    })
+    
+    // Format the amount field as currency
+    
+    $('input[name=amount]').blur(function(){
+      $(this).val(to_dollar_amount($(this).val()));
     })
 
   })
+  
+  function show_extended_suggested_donation() {
+    var numTickets = $('input[name=number_of_tickets]:checked').val();
+    if (numTickets == undefined) { return; }
+    var suggestedTicketDonation = #{@concert.suggested_ticket_donation};
+    if (numTickets == 1) {
+      $('strong#suggested-donation').text('(suggested donation is $' + suggestedTicketDonation + ' per ticket)');
+    } else {
+      var suggestedDonation = numTickets * suggestedTicketDonation;
+      $('strong#suggested-donation').text('(suggested donation is $' + suggestedTicketDonation + ' per ticket, $' + suggestedDonation + ' for your ' + numTickets + ' tickets)');
+    }
+  }
