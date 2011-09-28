@@ -6,20 +6,22 @@
     .container
       = yield
       - if Rails.env.production?
-        <!-- Start of Woopra Code -->
+        <!-- Quantcast Tag -->
         :javascript
-          function woopraReady(tracker) {
-              tracker.setDomain('concertsintheclearing.heroku.com');
-              tracker.setIdleTimeout(300000);
-              tracker.track();
-              return false;
-          }
+          var _qevents = _qevents || [];
+
           (function() {
-              var wsc = document.createElement('script');
-              wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js';
-              wsc.type = 'text/javascript';
-              wsc.async = true;
-              var ssc = document.getElementsByTagName('script')[0];
-              ssc.parentNode.insertBefore(wsc, ssc);
+          var elem = document.createElement('script');
+          elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+          elem.async = true;
+          elem.type = "text/javascript";
+          var scpt = document.getElementsByTagName('script')[0];
+          scpt.parentNode.insertBefore(elem, scpt);
           })();
-    
+
+          _qevents.push({
+          qacct:"p-13D793-nq4-wk"
+          });
+        %noscript
+          %div{:style => "display:none;"}
+            <img src="//pixel.quantserve.com/pixel/p-13D793-nq4-wk.gif" border="0" height="1" width="1" alt="Quantcast"/>
