@@ -4,5 +4,7 @@ class Reservation < ActiveRecord::Base
   
   belongs_to :patron
   belongs_to :concert
+  
+  has_one :donation
 
 end

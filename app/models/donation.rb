@@ -1,10 +1,12 @@
 class Donation < ActiveRecord::Base
 
   belongs_to :patron
-  validates :patron_id, :presence => true
+  validates_presence_of :patron_id
   
   belongs_to :concert
   belongs_to :reservation
+  
+  validates_presence_of :amount
   
   attr_accessor :credit_card_type,
                 :credit_card_number,
@@ -12,8 +14,7 @@ class Donation < ActiveRecord::Base
                 :credit_card_expiration_year,
                 :credit_card_verification,
                 :credit_card_first_name,
-                :credit_card_last_name,
-                :amount
+                :credit_card_last_name
 
   if Rails.env.production?
     ActiveMerchant::Billing::Base.mode = :production
@@ -54,7 +55,7 @@ class Donation < ActiveRecord::Base
       description += "/Tickets, #{reservation.concert.name}, FMV #{fair_market_value_of_tickets.to_dollar_amount}"
     end
 
-    response = gateway.purchase((@amount * 100).to_i, @credit_card, :description => description)
+    response = gateway.purchase((amount * 100).to_i, @credit_card, :description => description)
     return [true, response.authorization] if response.success?
     return [false, response.message]
     

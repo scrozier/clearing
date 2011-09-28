@@ -1,1 +1,15 @@
 %h1 Reservations
+- for concert in Concert.order(:date_and_time)
+  %h2= concert.name
+  %table
+    %tr
+      %th Patron
+      %th{:style => 'text-align:right'} Tickets
+      %th{:style => 'text-align:right'} Donation
+    - for reservation in concert.reservations.includes(:patron).order('patrons.last_name, patrons.first_name')
+      - patron = reservation.patron
+      - donation = reservation.donation
+      %tr
+        %td= "#{patron.first_name} #{patron.last_name}"
+        %td{:style => 'text-align:right'}= reservation.number_of_tickets
+        %td{:style => 'text-align:right'}= donation ? donation.amount.to_dollar_amount : ''
