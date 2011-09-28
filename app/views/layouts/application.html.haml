@@ -5,3 +5,20 @@
     = render '/top_nav', :nav_list => 'application'
     .container
       = yield
+      <!-- Start of Woopra Code -->
+      :javascript
+        function woopraReady(tracker) {
+            tracker.setDomain('concertsintheclearing.heroku.com');
+            tracker.setIdleTimeout(300000);
+            tracker.track();
+            return false;
+        }
+        (function() {
+            var wsc = document.createElement('script');
+            wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js';
+            wsc.type = 'text/javascript';
+            wsc.async = true;
+            var ssc = document.getElementsByTagName('script')[0];
+            ssc.parentNode.insertBefore(wsc, ssc);
+        })();
+    
