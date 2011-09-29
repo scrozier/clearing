@@ -32,9 +32,11 @@
               = radio_button_tag :number_of_tickets, num, num == @number_of_tickets
               = num.to_s
         .alert-message.news{:style => 'margin-top:1.0em'}
-          %div{:style => 'font-size:1.2em'}
+          %div
             = radio_button_tag :make_donation, true, true
-            Yes, I would like to make a donation to support great music in Dallas.
+            %p{:style => 'display:inline-block; margin-left:1.2em; margin-top: -1.7em; font-size:1.2em'}
+              Yes, I would like to make a donation to support Concerts in the Clearing. (Suggested donation is
+              %span#suggested-donation
           %div
             = radio_button_tag :make_donation, false
             No, not at this time.
@@ -54,13 +56,6 @@
             .input
               = text_field_tag :credit_card_first_name, @donation.credit_card_first_name, :class => "span3"
               = text_field_tag :credit_card_last_name, @donation.credit_card_last_name, :class => "span3"
-            .clearfix
-            %div{:style => 'text-align:center'}
-              %p
-                %strong#suggested-donation
-                  (suggested donation is
-                  = "$#{@concert.suggested_ticket_donation}"
-                  per ticket)
             .clearfix
             = app_text_field_tag :amount, nil, 2, @donation.amount
         .actions
@@ -112,13 +107,12 @@
   })
   
   function show_extended_suggested_donation() {
-    var numTickets = $('input[name=number_of_tickets]:checked').val();
-    if (numTickets == undefined) { return; }
     var suggestedTicketDonation = #{@concert.suggested_ticket_donation};
-    if (numTickets == 1) {
-      $('strong#suggested-donation').text('(suggested donation is $' + suggestedTicketDonation + ' per ticket)');
+    var numTickets = $('input[name=number_of_tickets]:checked').val();
+    if (numTickets == undefined || numTickets == 1) {
+      $('span#suggested-donation').text('$' + suggestedTicketDonation + ' per ticket.)');
     } else {
       var suggestedDonation = numTickets * suggestedTicketDonation;
-      $('strong#suggested-donation').text('(suggested donation is $' + suggestedTicketDonation + ' per ticket, $' + suggestedDonation + ' for your ' + numTickets + ' tickets)');
+      $('span#suggested-donation').text('$' + suggestedTicketDonation + ' per ticket, $' + suggestedDonation + ' for your ' + numTickets + ' tickets.)');
     }
   }
