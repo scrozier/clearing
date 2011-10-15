@@ -1,4 +1,4 @@
-- if Date.today > Date.new(2011, 9, 15) && Date.today < Date.new(2011, 10, 15)
+- if Date.today > Date.new(2011, 10, 14) && Date.today < Date.new(2011, 10, 16)
   .row
     .span16.columns
       - unless flash.empty?
@@ -6,11 +6,9 @@
           = display_flash
       .alert-message.news
         %p
-          %span.label.success EXTRA
-          Peter Mayer will hold a 2-hour guitar/songwriting workshop October 15, 10:00am to noon.
-          Contact
-          = mail_to 'mquigley@dallasuu.org', 'Martha Quigley'
-          for more information, or to sign up. There is a $20 fee per participant. Space is limited.
+          %span.label.success TICKETS STILL AVAILABLE
+          Tickets are still available for Peter Mayer <strong>tonight</strong>. Reserve your tickets below, or come
+          to the tickets table tonight by 7:45pm.
 .row
   .span4.columns
     .home-concert.current
@@ -18,7 +16,10 @@
       %h3 singer/songwriter
       %h1 Peter Mayer
       .tickets
-        = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'mayer_2011')
+        - if Date.today > Date.new(2011, 9, 15) && Date.today < Date.new(2011, 10, 16)
+          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'mayer_2011')
+        - else
+          WATCH FOR UPCOMING SHOWS
       %p "Peter does nothing less than address the very nature of our existence." &mdash;Dale Connelly, Minnesota Public Radio
       %p "If I rocked half as hard as Peter does, I'd own the world by now." &mdash;Janis Ian
       = image_tag 'mayer-graphic-home-page.jpg', :class => 'artist-graphic'
