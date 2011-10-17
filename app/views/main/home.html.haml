@@ -11,7 +11,7 @@
           to the tickets table tonight by 7:45pm.
 .row
   .span4.columns
-    .home-concert.current
+    .home-concert
       %h2 Saturday, October 15, 2011<br />8:00pm
       %h3 singer/songwriter
       %h1 Peter Mayer
@@ -19,20 +19,23 @@
         - if Date.today > Date.new(2011, 9, 15) && Date.today < Date.new(2011, 10, 16)
           = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'mayer_2011')
         - else
-          WATCH FOR UPCOMING SHOWS
+          = link_to '<span class="label success">CHECK OUT OUR OTHER CONCERTS</span>'.html_safe, root_path
       %p "Peter does nothing less than address the very nature of our existence." &mdash;Dale Connelly, Minnesota Public Radio
       %p "If I rocked half as hard as Peter does, I'd own the world by now." &mdash;Janis Ian
-      = image_tag 'mayer-graphic-home-page.jpg', :class => 'artist-graphic'
+      = image_tag 'mayer-graphic-home-page-white.jpg', :class => 'artist-graphic'
   .span4.columns
-    .home-concert
+    .home-concert.current
       %h2 Sunday, November 13, 2011<br />7:00pm
       %h3 choir and orchestra
       %h1 Masterworks
       .tickets
-        <span class="label success">TICKETS AVAILABLE OCTOBER 13</span>
+        - if Date.today > Date.new(2011, 10, 13) && Date.today < Date.new(2011, 11, 14)
+          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'memorial_2011')
+        - else
+          WATCH FOR UPCOMING SHOWS
       %p The evening opens with Beethoven's joyful String Quartet, Opus 18, No. 2.
-      %p Then, the mood shifts to peace and rememberance, as choir and orchestra perform Maurice Durufl&eacute;'s lush, Romantic <i>Requiem</i>, a 20th century masterpiece.
-      = image_tag 'masterworks-graphic-home-page-white.jpg', :class => 'artist-graphic'
+      %p Then, the choir joins the orchestra in Maurice Durufl&eacute;'s lush, dramatic <i>Requiem</i>, a 20th century masterpiece.
+      = image_tag 'masterworks-graphic-home-page.jpg', :class => 'artist-graphic'
   .span4.columns
     .home-concert
       %h2 Saturday, March 3, 2012<br />8:00pm
