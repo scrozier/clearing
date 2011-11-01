@@ -2,6 +2,7 @@ class TicketsController < ApplicationController
   
   def show
     @concert = Concert.where(:ident_string => params[:ident_string]).first
+    @in_memory_of = @in_memory_by = ''
   end
   
   def reserve
@@ -28,12 +29,14 @@ class TicketsController < ApplicationController
         :patron_id => @patron.id,
         :concert_id => @concert.id,
         :credit_card_ends_with => params[:credit_card_number][-4, 4],
-        :amount => params[:amount]
+        :amount => extract_donation_amount(params[:standard_amount], params[:amount])
         )
       fill_credit_card_info_from_params
     end
     
     @number_of_tickets = params[:number_of_tickets].to_i
+    @in_memory_of = params[:in_memory_of]
+    @in_memory_by = params[:in_memory_by]
       
     unless @patron.valid?
       flash.now[:error] = "There was a problem with what you entered." + object_errors(@patron)
@@ -46,25 +49,33 @@ class TicketsController < ApplicationController
       render :action => :show
       return
     end
-    number_of_tickets = params[:number_of_tickets].to_i
     
     if @make_donation == 'true'
+
       unless @donation.card_valid?
         flash.now[:error] = 'Invalid credit card information.'
         render :action => :show
         return
       end
+    
+      if @donation.amount.nil? || @donation.amount <= BigDecimal.new('0')
+        flash.now[:error] = 'Please enter a donation amount.'
+        render :action => :show
+        return
+      end
+      
     end
     
-    if @make_donation == 'true' && @donation.amount <= 0.0
-      flash.now[:error] = 'Please enter a donation amount.'
+    if (@in_memory_of.present? && @in_memory_by.blank?) ||
+      (@in_memory_of.blank? && @in_memory_by.present?)
+      flash.now[:error] = 'For memorials, please enter both your name(s) and the name(s) of the person or persons to be memorialized.'
       render :action => :show
       return
     end
-
+    
     # now actually process the reservation...
     
-    @reservation = process_reservation(number_of_tickets)
+    @reservation = process_reservation(@number_of_tickets, params[:in_memory_of], params[:in_memory_by])
     unless @reservation
       flash.now[:error] = 'There was a problem reserving your tickets. ' + contact_us
       render :action => :show
@@ -72,7 +83,6 @@ class TicketsController < ApplicationController
     end
 
     Notifier.tickets(@reservation).deliver
-
 
     if @make_donation == 'true'
       render :action => :donation_confirm and return
@@ -130,13 +140,15 @@ class TicketsController < ApplicationController
     render :layout => 'printed_ticket'
   end
   
-  def process_reservation(number_of_tickets)
+  def process_reservation(number_of_tickets, in_memory_of, in_memory_by)
 
     unique_token = Digest::SHA1.hexdigest Time.now.to_s
     @patron.reservations.create(
       :concert_id => @concert.id,
       :number_of_tickets => number_of_tickets,
-      :unique_token => unique_token
+      :unique_token => unique_token,
+      :in_memory_of => in_memory_of,
+      :in_memory_by => in_memory_by
       )
 
   end
@@ -149,7 +161,12 @@ class TicketsController < ApplicationController
     @donation.credit_card_verification = params[:credit_card_verification]
     @donation.credit_card_first_name = params[:credit_card_first_name]
     @donation.credit_card_last_name = params[:credit_card_last_name]
-    @donation.amount = BigDecimal.new(params[:amount])
+  end
+  
+  def extract_donation_amount(standard_amount, amount)
+    return nil if standard_amount.nil?
+    return amount if standard_amount == 'other amount'
+    return standard_amount.to_i
   end
   
 end

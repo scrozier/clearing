@@ -8,6 +8,22 @@
   %strong
     = pretty_date_time(@reservation.concert.date_and_time) + '.'
   You will receive an email shortly (from info@concertsintheclearing.org) with a link to get your tickets, and additional instructions.
+
+- unless @reservation.in_memory_of.blank?
+  %h2 In memory of...
+  %p
+    We will print in the program your remembrance of
+    %strong
+      = @reservation.in_memory_of
+    (by&nbsp;
+    %strong><
+      = @reservation.in_memory_by
+    ).
+  %p
+    If this information is not correct, please
+    = (mail_to 'info@concertsintheclearing.org', 'email us') + ','
+    or contact First Unitarian Church at 214.528.3990.
+
 %h2 Venue
 %address
   4015 Normandy Ave<br />

@@ -23,41 +23,102 @@
         %p We will not use or disclose your email address for any purpose other than the concert series.
         = app_text_field_tag :first_name, nil, 3, @patron.first_name
         = app_text_field_tag :last_name, nil, 3, @patron.last_name
-        = app_text_field_tag :email, nil, 6, (@patron.errors.on(:email) ? nil : @patron.email)
-        = app_text_field_tag :email_confirmation, 'Re-type email', 6, (@patron.errors.on(:email) ? nil : @patron.email)
+        = app_text_field_tag :email, nil, 6, (@patron.errors[:email].empty? ? @patron.email : nil)
+        = app_text_field_tag :email_confirmation, 'Re-type email', 6, (@patron.errors[:email].empty? ? @patron.email : nil)
         = label_tag :number_of_tickets, 'Number of tickets'
         .input
           - for num in 1..(configurator :ticket_limit_per_person)
             %span{:style => 'display:inline-block; width:3.0em'}
               = radio_button_tag :number_of_tickets, num, num == @number_of_tickets
               = num.to_s
-        .alert-message.news{:style => 'margin-top:1.0em'}
-          %div
-            = radio_button_tag :make_donation, true, true
-            %p{:style => 'display:inline-block; margin-left:1.2em; margin-top: -1.7em; font-size:1.2em'}
-              Yes, I would like to make a donation to support Concerts in the Clearing. (Suggested donation is
-              %span#suggested-donation
-          %div
-            = radio_button_tag :make_donation, false
-            No, not at this time.
-          #donation
-            %legend Donation information
-            .clearfix
-            = label_tag :credit_card_type
-            .input
-              = select_tag :credit_card_type, options_for_select([[], ["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"]], @donation.credit_card_type), :class => 'span3'
-            = app_text_field_tag :credit_card_number, nil, 3, @donation.credit_card_number
-            = label_tag :credit_card_expiration_year, 'Card expiration'
-            .input
-              = select_tag :credit_card_expiration_month, options_for_card_expiration_month(@donation.credit_card_expiration_month), :class => 'span3'
-              = select_tag :credit_card_expiration_year, options_for_card_expiration_year(@donation.credit_card_expiration_year), :class => 'span2'
-            = app_text_field_tag :credit_card_verification, 'Card verification value (CVV)', 1, @donation.credit_card_verification
-            = label_tag :credit_card_first_name, 'Name on card (first, last)'
-            .input
-              = text_field_tag :credit_card_first_name, @donation.credit_card_first_name, :class => "span3"
-              = text_field_tag :credit_card_last_name, @donation.credit_card_last_name, :class => "span3"
-            .clearfix
-            = app_text_field_tag :amount, nil, 2, @donation.amount
+
+
+
+        - if @concert.ident_string == 'memorial_2011'
+        
+          .alert-message.news{:style => 'margin-top:1.0em'}
+            %legend In memory of...
+            %p{:style => 'margin-top:1.0em'} It is a tradition from the roots of this concert series that this concert is performed and received in memory of loved ones who have preceded us in death. The names of those remembered will be printed in the concert program.
+            %p{:style => 'margin-top:1.0em'} If you would like to honor a love one in this manner, please enter their name(s) here:
+            = app_text_field_tag :in_memory_of, nil, 6, @in_memory_of
+            = app_text_field_tag :in_memory_by, 'Remembered by (your name(s) for the program)', 6, @in_memory_by
+
+          .alert-message.news{:style => 'margin-top:1.0em'}
+            %div
+              = radio_button_tag :make_donation, true, true
+              %p{:style => 'display:inline-block; margin-top: -1.7em; font-size:1.2em'}
+                Yes, I would like to make a donation to support Concerts in the Clearing.
+            %div
+              = radio_button_tag :make_donation, false
+              No, not at this time.
+            #donation
+              %legend Donation information
+              .clearfix
+              = label_tag :credit_card_type
+              .input
+                = select_tag :credit_card_type, options_for_select([[], ["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"]], @donation.credit_card_type), :class => 'span3'
+              = app_text_field_tag :credit_card_number, nil, 3, @donation.credit_card_number
+              = label_tag :credit_card_expiration_year, 'Card expiration'
+              .input
+                = select_tag :credit_card_expiration_month, options_for_card_expiration_month(@donation.credit_card_expiration_month), :class => 'span3'
+                = select_tag :credit_card_expiration_year, options_for_card_expiration_year(@donation.credit_card_expiration_year), :class => 'span2'
+              = app_text_field_tag :credit_card_verification, 'Card verification value (CVV)', 1, @donation.credit_card_verification
+              = label_tag :credit_card_first_name, 'Name on card (first, last)'
+              .input
+                = text_field_tag :credit_card_first_name, @donation.credit_card_first_name, :class => "span3"
+                = text_field_tag :credit_card_last_name, @donation.credit_card_last_name, :class => "span3"
+              .clearfix
+              = label_tag :standard_amount, 'Amount'
+              .input
+                = radio_button_tag :standard_amount, 25, @donation.amount == 25
+                $25
+                %br
+                = radio_button_tag :standard_amount, 50, @donation.amount == 50
+                $50
+                %br
+                = radio_button_tag :standard_amount, 100, @donation.amount == 100
+                $100
+                %br
+                = radio_button_tag :standard_amount, 200, @donation.amount == 200
+                $200
+                %br
+                = radio_button_tag :standard_amount, 'other amount', @donation.amount != 0 && !([25, 50, 100,200].include? @donation.amount)
+                other amount
+                = text_field_tag :amount, @donation.amount, :class => "span2"
+                
+        -else
+          .alert-message.news{:style => 'margin-top:1.0em'}
+            %div
+              = radio_button_tag :make_donation, true, true
+              %p{:style => 'display:inline-block; margin-left:1.2em; margin-top: -1.7em; font-size:1.2em'}
+                Yes, I would like to make a donation to support Concerts in the Clearing. (Suggested donation is
+                %span#suggested-donation
+            %div
+              = radio_button_tag :make_donation, false
+              No, not at this time.
+            #donation
+              %legend Donation information
+              .clearfix
+              = label_tag :credit_card_type
+              .input
+                = select_tag :credit_card_type, options_for_select([[], ["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"]], @donation.credit_card_type), :class => 'span3'
+              = app_text_field_tag :credit_card_number, nil, 3, @donation.credit_card_number
+              = label_tag :credit_card_expiration_year, 'Card expiration'
+              .input
+                = select_tag :credit_card_expiration_month, options_for_card_expiration_month(@donation.credit_card_expiration_month), :class => 'span3'
+                = select_tag :credit_card_expiration_year, options_for_card_expiration_year(@donation.credit_card_expiration_year), :class => 'span2'
+              = app_text_field_tag :credit_card_verification, 'Card verification value (CVV)', 1, @donation.credit_card_verification
+              = label_tag :credit_card_first_name, 'Name on card (first, last)'
+              .input
+                = text_field_tag :credit_card_first_name, @donation.credit_card_first_name, :class => "span3"
+                = text_field_tag :credit_card_last_name, @donation.credit_card_last_name, :class => "span3"
+              .clearfix
+              = app_text_field_tag :amount, nil, 2, @donation.amount
+            
+            
+            
+            
+            
         .actions
           = submit_tag 'Request tickets', :class => 'btn primary'
 
@@ -87,7 +148,7 @@
       if ($('input[name=credit_card_last_name]').val() == '') {
         $('input[name=credit_card_last_name]').val($(this).val());
       }
-    })
+    });
     
     // Display the extended suggested donation when the page is loaded, and
     // when a number of tickets is selected.
@@ -96,15 +157,32 @@
     
     $('input[id^=number_of_tickets]').click(function(){
       show_extended_suggested_donation();
-    })
+    });
     
-    // Format the amount field as currency
+    // Format the amount field as currency and blank it if the value is one
+    // of the standard values
     
-    $('input[name=amount]').blur(function(){
+    var amtField = $('input[name=amount]');
+    amtField.val(to_dollar_amount(amtField.val()));
+    if (amtField.val() == '25.00' || amtField.val() == '50.00' || amtField.val() == '100.00' || amtField.val() == '200.00') {
+      amtField.val('');
+    }
+    
+    amtField.blur(function(){
       $(this).val(to_dollar_amount($(this).val()));
-    })
+    });
+    
+    // Set the amount field disabled when a standard amount is chosen.
+    
+    $('input[name=standard_amount]').click(function() {
+      if (!($('input[name=standard_amount]:checked').val() == 'other amount')) {
+        $('input[name=amount]').attr('disabled', true);
+      } else {
+        $('input[name=amount]').attr('disabled', false);
+      }
+    });
 
-  })
+  });
   
   function show_extended_suggested_donation() {
     var suggestedTicketDonation = #{@concert.suggested_ticket_donation};

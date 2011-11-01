@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110926190552) do
+ActiveRecord::Schema.define(:version => 20111031173951) do
 
   create_table "concerts", :force => true do |t|
     t.string   "name"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20110926190552) do
   create_table "donations", :force => true do |t|
     t.integer  "patron_id"
     t.integer  "concert_id"
-    t.decimal  "amount",                :precision => 8, :scale => 2
+    t.decimal  "amount"
     t.string   "credit_card_ends_with"
     t.string   "transaction_code"
     t.datetime "created_at"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(:version => 20110926190552) do
     t.datetime "updated_at"
     t.integer  "concert_id"
     t.string   "unique_token"
+    t.string   "in_memory_of"
+    t.string   "in_memory_by"
   end
 
 end
