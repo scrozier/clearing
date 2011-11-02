@@ -3,4 +3,9 @@
     %h1 Administration dashboard
   .row
     .span16.columns
-      = link_to 'Reservations by concert', admin_reservations_report_path
+      %h2 Reservations by concert
+      - for concert in Concert.order(:date_and_time).all
+        %p= link_to "#{concert.name}, #{pretty_date(concert.date_and_time)}", admin_reservations_report_path(concert.id)
+      %h2 Other
+      %p= link_to 'Enter walk-up patrons', root_path
+      %p= link_to 'Export mailing list', root_path

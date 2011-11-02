@@ -1,28 +1,27 @@
 %h1 Reservations
-- for concert in Concert.order(:date_and_time)
-  - total_tickets = 0
-  - total_donations = BigDecimal.new('0')
-  %h2= concert.name
-  %table
-    %thead
-      %tr
-        %th Patron
-        %th{:style => 'text-align:right'} Tickets
-        %th{:style => 'text-align:right'} Donation
-    %tbody
-    - for reservation in concert.reservations.includes(:patron).order('patrons.last_name, patrons.first_name')
-      - patron = reservation.patron
-      - donation = reservation.donation
-      - total_tickets += reservation.number_of_tickets
-      - total_donations += donation.amount if donation
-      %tr
-        %td= "#{patron.first_name} #{patron.last_name}"
-        %td{:style => 'text-align:right'}= reservation.number_of_tickets
-        %td{:style => 'text-align:right'}= donation ? donation.amount.to_dollar_amount : ''
+- total_tickets = 0
+- total_donations = BigDecimal.new('0')
+%h2= @concert.name
+%table
+  %thead
     %tr
-      %td
-        %h1 Totals
-      %td{:style => 'text-align:right'}
-        %h1= total_tickets
-      %td{:style => 'text-align:right'}
-        %h1= total_donations.to_dollar_amount
+      %th Patron
+      %th{:style => 'text-align:right'} Tickets
+      %th{:style => 'text-align:right'} Donation
+  %tbody
+  - for reservation in @concert.reservations.includes(:patron).order('patrons.last_name, patrons.first_name')
+    - patron = reservation.patron
+    - donation = reservation.donation
+    - total_tickets += reservation.number_of_tickets
+    - total_donations += donation.amount if donation
+    %tr
+      %td= "#{patron.first_name} #{patron.last_name}"
+      %td{:style => 'text-align:right'}= reservation.number_of_tickets
+      %td{:style => 'text-align:right'}= donation ? donation.amount.to_dollar_amount : ''
+  %tr
+    %td
+      %h1 Totals
+    %td{:style => 'text-align:right'}
+      %h1= total_tickets
+    %td{:style => 'text-align:right'}
+      %h1= total_donations.to_dollar_amount

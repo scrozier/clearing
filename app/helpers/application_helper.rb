@@ -23,11 +23,12 @@ module ApplicationHelper
   end
   
   def pretty_date_time(dt)
-    dt.strftime('%l:%M%P, %B %d, %Y').lstrip
+    "#{pretty_date(dt)}, #{pretty_time(dt)}"
   end
   
   def pretty_date(dt)
-    dt.strftime('%B %d, %Y').lstrip
+    day = dt.day.to_s
+    dt.strftime("%B #{day}, %Y").lstrip
   end
   
   def pretty_time(dt)

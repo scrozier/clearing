@@ -6,7 +6,7 @@ Clearing::Application.routes.draw do
   
   namespace :admin do
     resources :concerts
-    match 'reservations/report' => 'reports#reservations', :as => :reservations_report
+    match 'reservations/report/:id' => 'reports#reservations', :as => :reservations_report
   end
   
   match 'concerts/intro' => 'concerts#intro', :as => :concerts_intro
