@@ -1,5 +1,3 @@
-require 'CSV'
-
 class Admin::MiscellaneousController < ApplicationController
 
   def enter_walkups
