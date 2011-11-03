@@ -8,6 +8,8 @@
       %th Patron
       %th{:style => 'text-align:right'} Tickets
       %th{:style => 'text-align:right'} Donation
+      - if @concert.ident_string == 'memorial_2011'
+        %th{:style => 'text-align:right'} Memorial
   %tbody
   - for reservation in @concert.reservations.includes(:patron).order('patrons.last_name, patrons.first_name')
     - patron = reservation.patron
@@ -18,6 +20,13 @@
       %td= "#{patron.first_name} #{patron.last_name}"
       %td{:style => 'text-align:right'}= reservation.number_of_tickets
       %td{:style => 'text-align:right'}= donation ? donation.amount.to_dollar_amount : ''
+      - if @concert.ident_string == 'memorial_2011'
+        %td{:style => 'text-align:right'}
+          - if reservation.in_memory_of
+            = reservation.in_memory_of
+            %br
+            by 
+            = reservation.in_memory_by
   %tr
     %td
       %h1 Totals
@@ -25,3 +34,4 @@
       %h1= total_tickets
     %td{:style => 'text-align:right'}
       %h1= total_donations.to_dollar_amount
+    %td
