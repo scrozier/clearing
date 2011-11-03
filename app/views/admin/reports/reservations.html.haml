@@ -12,7 +12,7 @@
   - for reservation in @concert.reservations.includes(:patron).order('patrons.last_name, patrons.first_name')
     - patron = reservation.patron
     - donation = reservation.donation
-    - total_tickets += reservation.number_of_tickets
+    - total_tickets += reservation.number_of_tickets if reservation.number_of_tickets
     - total_donations += donation.amount if donation
     %tr
       %td= "#{patron.first_name} #{patron.last_name}"

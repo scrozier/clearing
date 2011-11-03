@@ -1,0 +1,14 @@
+%h1 Enter walk-up patrons
+%h2= @concert.name
+%h3= pretty_date(@concert.date_and_time)
+- unless flash.empty?
+  = display_flash
+%fieldset
+  %legend Walk-up patrons
+  = form_for Patron.new, :url => admin_add_walkup_path do |f|
+    = hidden_field_tag :concert_id, @concert.id
+    = app_text_field f, :first_name, nil, 3
+    = app_text_field f, :last_name, nil, 3
+    = app_text_field f, :email, nil, 5
+    .actions
+      = f.submit :class => 'btn primary'

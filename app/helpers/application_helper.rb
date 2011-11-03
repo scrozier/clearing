@@ -36,12 +36,11 @@ module ApplicationHelper
   end
   
   def display_flash
-    flash_types = [:error, :warning, :notice, :success]
+    # flash_types = [:error, :warning, :info, :success]
 
-    messages = ((flash_types & flash.keys).collect do |key|
-      content_tag(:div, flash[key].html_safe, :class => "#{key}")
+    messages = (flash.keys.collect do |key|
+      content_tag(:div, flash[key].html_safe, :class => "alert-message #{key}")
     end.join("\n"))
-    
     if messages.size > 0
       content_tag(:div, messages.html_safe, :id => "flash")
     else

@@ -7,6 +7,8 @@ Clearing::Application.routes.draw do
   namespace :admin do
     resources :concerts
     match 'reservations/report/:id' => 'reports#reservations', :as => :reservations_report
+    match 'enter_walkups/:id' => 'miscellaneous#enter_walkups', :as => :enter_walkups
+    match 'add_walkup' => 'miscellaneous#add_walkup'
   end
   
   match 'concerts/intro' => 'concerts#intro', :as => :concerts_intro
