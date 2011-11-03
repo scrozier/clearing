@@ -10,4 +10,4 @@
       - for concert in Concert.order(:date_and_time).all
         %p= link_to "#{concert.name}, #{pretty_date(concert.date_and_time)}", admin_enter_walkups_path(concert.id)
       %h2 Other
-      %p= link_to 'Export mailing list', root_path
+      %p= link_to 'Export mailing list', admin_create_patron_csv_path

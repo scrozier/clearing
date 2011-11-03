@@ -1,3 +1,5 @@
+require 'CSV'
+
 class Admin::MiscellaneousController < ApplicationController
 
   def enter_walkups
@@ -21,6 +23,14 @@ class Admin::MiscellaneousController < ApplicationController
     p.reservations << r
     flash[:success] = 'Done.'
     redirect_to admin_enter_walkups_path(params[:concert_id]) and return
+  end
+  
+  def create_patron_csv
+    csv_string = %Q["First Name","Last Name","Email"<br />]
+    for patron in Patron.all
+      csv_string << %Q["#{patron.first_name}","#{patron.last_name}","#{patron.email}"<br />]
+    end
+    render :text => csv_string
   end
 
 end
