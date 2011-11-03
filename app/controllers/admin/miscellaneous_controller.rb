@@ -26,7 +26,7 @@ class Admin::MiscellaneousController < ApplicationController
   def create_patron_csv
     csv_string = %Q["First Name","Last Name","Email"<br />]
     for patron in Patron.all
-      unless patron.reservations.where(:concert_id => Concert.where(:ident_string => 'memorial_2011'))
+      unless patron.reservations.where(:concert_id => Concert.where(:ident_string => 'memorial_2011')).first
         csv_string << %Q["#{patron.first_name}","#{patron.last_name}","#{patron.email}"<br />]
       end
     end
