@@ -8,6 +8,7 @@
       %th Patron
       %th{:style => 'text-align:right'} Tickets
       %th{:style => 'text-align:right'} Donation
+      %th Email
       - if @concert.ident_string == 'memorial_2011'
         %th{:style => 'text-align:right'} Memorial
   %tbody
@@ -20,6 +21,7 @@
       %td= "#{patron.first_name} #{patron.last_name}"
       %td{:style => 'text-align:right'}= reservation.number_of_tickets
       %td{:style => 'text-align:right'}= donation ? donation.amount.to_dollar_amount : ''
+      %td= patron.email
       - if @concert.ident_string == 'memorial_2011'
         %td{:style => 'text-align:right'}
           - unless reservation.in_memory_of.blank?
