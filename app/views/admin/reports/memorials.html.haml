@@ -1,0 +1,18 @@
+%h1 Memorials
+%h2= @concert.name
+%table
+  %thead
+    %tr
+      %th Patron
+      %th Email
+      %th In memory of
+      %th By
+  %tbody
+  - for reservation in @concert.reservations.includes(:patron).order('patrons.last_name, patrons.first_name')
+    - unless reservation.in_memory_of.blank?
+      - patron = reservation.patron
+      %tr
+        %td= "#{patron.first_name} #{patron.last_name}"
+        %td= patron.email
+        %td= reservation.in_memory_of
+        %td= reservation.in_memory_by

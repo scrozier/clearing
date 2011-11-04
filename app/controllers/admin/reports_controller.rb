@@ -4,4 +4,8 @@ class Admin::ReportsController < ApplicationController
     @concert = Concert.find(params[:id])
   end
 
+  def memorials
+    @concert = Concert.find(params[:id])
+  end
+
 end
