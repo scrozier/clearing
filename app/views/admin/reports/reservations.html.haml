@@ -22,7 +22,7 @@
       %td{:style => 'text-align:right'}= donation ? donation.amount.to_dollar_amount : ''
       - if @concert.ident_string == 'memorial_2011'
         %td{:style => 'text-align:right'}
-          - if reservation.in_memory_of
+          - unless reservation.in_memory_of.blank?
             = reservation.in_memory_of
             %br
             by 
