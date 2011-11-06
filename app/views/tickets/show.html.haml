@@ -34,7 +34,7 @@
 
 
 
-        - if @concert.ident_string == 'memorial_2011'
+        - if @concert.ident_string == 'memorial_2011' && Date.today < Date.new(2011, 11, 7)
         
           .alert-message.news{:style => 'margin-top:1.0em'}
             %legend In memory of...
