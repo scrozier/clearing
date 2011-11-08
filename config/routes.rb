@@ -3,7 +3,7 @@ Clearing::Application.routes.draw do
   root :to => 'main#home'
   match 'about' => 'main#about', :as => :about
   match 'contact_us' => 'main#contact_us', :as => :contact_us
-  match 'static_image/:image_name' => 'main#static_image'
+  match 'static_jpg_image/:image_name' => 'main#static_image'
   
   namespace :admin do
     resources :concerts
