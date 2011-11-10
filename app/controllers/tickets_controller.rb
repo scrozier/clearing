@@ -164,7 +164,7 @@ class TicketsController < ApplicationController
   end
   
   def extract_donation_amount(standard_amount, amount)
-    return nil if standard_amount.nil?
+    return amount if standard_amount.nil?
     return amount if standard_amount == 'other amount'
     return standard_amount.to_i
   end
