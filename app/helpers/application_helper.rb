@@ -67,5 +67,9 @@ module ApplicationHelper
   def dollar_amount(amt)
     sprintf('$%0.2f', amt)
   end
+  
+  def todays_date(args)
+    Date.today >= args[:is_between] && Date.today <= args[:and]
+  end
 
 end

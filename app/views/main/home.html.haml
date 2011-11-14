@@ -1,4 +1,4 @@
-- if Date.today > Date.new(2011, 10, 14) && Date.today < Date.new(2011, 10, 16)
+- if todays_date :is_between => Date.new(2011, 10, 15), :and => Date.new(2011, 10, 15)
   .row
     .span16.columns
       - unless flash.empty?
@@ -16,7 +16,7 @@
       %h3 singer/songwriter
       %h1 Peter Mayer
       .tickets
-        - if Date.today > Date.new(2011, 9, 15) && Date.today < Date.new(2011, 10, 16)
+        - if todays_date :is_between => Date.new(2011, 9, 15), :and => Date.new(2011, 10, 16)
           = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'mayer_2011')
         - else
           = link_to '<span class="label success">CHECK OUT OUR OTHER CONCERTS</span>'.html_safe, root_path
@@ -24,35 +24,44 @@
       %p "If I rocked half as hard as Peter does, I'd own the world by now." &mdash;Janis Ian
       = image_tag 'mayer-graphic-home-page-white.jpg', :class => 'artist-graphic'
   .span4.columns
-    .home-concert.current
+    .home-concert
       %h2 Sunday, November 13, 2011<br />7:00pm
       %h3 choir and orchestra
       %h1 Masterworks
       .tickets
-        - if Date.today > Date.new(2011, 10, 13) && Date.today < Date.new(2011, 11, 14)
+        - if todays_date :is_between => Date.new(2011, 10, 14), :and => Date.new(2011, 11, 13)
           = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'memorial_2011')
         - else
-          WATCH FOR UPCOMING SHOWS
+          = link_to '<span class="label success">CHECK OUT OUR OTHER CONCERTS</span>'.html_safe, root_path
       %p The evening opens with Beethoven's joyful String Quartet, Opus 18, No. 2.
       %p Then, the choir joins the orchestra in Maurice Durufl&eacute;'s lush, dramatic <i>Requiem</i>, a 20th century masterpiece.
-      = image_tag 'masterworks-graphic-home-page.jpg', :class => 'artist-graphic'
+      = image_tag 'masterworks-graphic-home-page-white.jpg', :class => 'artist-graphic'
   .span4.columns
-    .home-concert
+    .home-concert.current
       %h2 Saturday, March 3, 2012<br />8:00pm
       %h3 flute, marimba, and more
       %h1 Helen Blackburn
       .tickets
-        <span class="label success">TICKETS AVAILABLE FEBRUARY 3</span>
+        - if todays_date :is_between => Date.new(2011, 11, 14), :and => Date.new(2012, 3, 3)
+          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'helen_2011')
+        - else
+          = link_to '<span class="label success">CHECK OUT OUR OTHER CONCERTS</span>'.html_safe, root_path
       %p An eclectic, exciting performance by flute virtuoso Helen Blackburn, her husband, marimbist Drew Lang, and perhaps some other great musical surprises.
       %p You'll just have to come and see.
-      = image_tag 'helen-graphic-home-page-white.jpg', :class => 'artist-graphic'
+      = image_tag 'helen-graphic-home-page.jpg', :class => 'artist-graphic'
   .span4.columns
     .home-concert
       %h2 Saturday, April 14, 2012<br />8:00pm
       %h3 big band and percussion
       %h1 UNT Latin Jazz
       .tickets
-        <span class="label success">TICKETS AVAILABLE MARCH 14</span>
+        - if todays_date :is_between => Date.new(2012, 3, 4), :and => Date.new(2012, 4, 14)
+          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'helen_2011')
+        - else
+          - if Date.today > Date.new(2012, 4, 14)
+            = link_to '<span class="label success">CHECK OUT OUR OTHER CONCERTS</span>'.html_safe, root_path
+          - else
+            <span class='label success'>TICKETS AVAILABLE MARCH 4</span>
       %p End the season with exciting music from south of the border with University of North Texas' Latin Jazz Ensemble.
       %p A "mini big band" with an exciting, expanded percussion section, this group will have the whole family salsa dancing.
       = image_tag 'latin-graphic-home-page-white.jpg', :class => 'artist-graphic'

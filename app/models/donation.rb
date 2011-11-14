@@ -52,7 +52,7 @@ class Donation < ActiveRecord::Base
 
     description = "Concerts in the Clearing"
     if reservation
-      description += "/Tickets, #{reservation.concert.name}, FMV #{fair_market_value_of_tickets.to_dollar_amount}"
+      description += "/Tickets, #{reservation.concert.name}"
     end
 
     response = gateway.purchase((amount * 100).to_i, @credit_card, :description => description)
