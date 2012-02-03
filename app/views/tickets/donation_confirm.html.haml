@@ -23,6 +23,9 @@
         %td Name on card
         %td= "#{@donation.credit_card_first_name} #{@donation.credit_card_last_name}"
       %tr
+        %td Billing address
+        %td= raw "#{@donation.credit_card_address}<br />#{@donation.credit_card_city} #{@donation.credit_card_state} #{@donation.credit_card_zip}"
+      %tr
         %td Amount
         %td= dollar_amount(@donation.amount)
     = form_tag process_donation_path do
@@ -36,6 +39,10 @@
       = hidden_field_tag :credit_card_verification, @donation.credit_card_verification
       = hidden_field_tag :credit_card_first_name, @donation.credit_card_first_name
       = hidden_field_tag :credit_card_last_name, @donation.credit_card_last_name
+      = hidden_field_tag :credit_card_address, @donation.credit_card_address
+      = hidden_field_tag :credit_card_city, @donation.credit_card_city
+      = hidden_field_tag :credit_card_state, @donation.credit_card_state
+      = hidden_field_tag :credit_card_zip, @donation.credit_card_zip
       = hidden_field_tag :amount, @donation.amount
       .actions
         = submit_tag 'Process donation', :class => 'btn primary'

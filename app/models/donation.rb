@@ -14,7 +14,11 @@ class Donation < ActiveRecord::Base
                 :credit_card_expiration_year,
                 :credit_card_verification,
                 :credit_card_first_name,
-                :credit_card_last_name
+                :credit_card_last_name,
+                :credit_card_address,
+                :credit_card_city,
+                :credit_card_state,
+                :credit_card_zip
 
   if Rails.env.production?
     ActiveMerchant::Billing::Base.mode = :production
@@ -34,11 +38,25 @@ class Donation < ActiveRecord::Base
       :first_name => @credit_card_first_name,
       :last_name => @credit_card_last_name,
       :verification_value => @credit_card_verification,
-      :type => @credit_card_type
+      :type => @credit_card_type,
       )
     @credit_card.valid?
   end
-  
+
+  def name_and_address
+    {
+      :email => patron.email,
+      :billing_address => {
+        :name     => "#{@credit_card_first_name} #{@credit_card_last_name}",
+        :address1 => @credit_card_address,
+        :city     => @credit_card_city,
+        :state    => @credit_card_state,
+        :country  => "US",
+        :zip      => @credit_card_zip
+      }
+    }
+  end
+
   # Returns a 2-element array:
   #   [successful?, transaction ID (string) or error message if payment unsuccessful]
   def process_payment
@@ -55,7 +73,7 @@ class Donation < ActiveRecord::Base
       description += "/Tickets, #{reservation.concert.name}"
     end
 
-    response = gateway.purchase((amount * 100).to_i, @credit_card, :description => description)
+    response = gateway.purchase((amount * 100).to_i, @credit_card, name_and_address.merge({:description => description}))
     return [true, response.authorization] if response.success?
     return [false, response.message]
     

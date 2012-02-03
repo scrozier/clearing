@@ -64,6 +64,12 @@ class TicketsController < ApplicationController
         return
       end
       
+      unless address_ok
+        flash.now[:error] = 'Please enter your complete billing address.'
+        render :action => :show
+        return
+      end
+      
     end
     
     if (@in_memory_of.present? && @in_memory_by.blank?) ||
@@ -161,12 +167,23 @@ class TicketsController < ApplicationController
     @donation.credit_card_verification = params[:credit_card_verification]
     @donation.credit_card_first_name = params[:credit_card_first_name]
     @donation.credit_card_last_name = params[:credit_card_last_name]
+    @donation.credit_card_address = params[:credit_card_address]
+    @donation.credit_card_city = params[:credit_card_city]
+    @donation.credit_card_state = params[:credit_card_state]
+    @donation.credit_card_zip = params[:credit_card_zip]
   end
   
   def extract_donation_amount(standard_amount, amount)
     return amount if standard_amount.nil?
     return amount if standard_amount == 'other amount'
     return standard_amount.to_i
+  end
+  
+  def address_ok
+    params[:credit_card_address] &&
+    params[:credit_card_city] &&
+    params[:credit_card_state] &&
+    params[:credit_card_zip]
   end
   
 end
