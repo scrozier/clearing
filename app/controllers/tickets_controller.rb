@@ -180,10 +180,10 @@ class TicketsController < ApplicationController
   end
   
   def address_ok
-    params[:credit_card_address] &&
-    params[:credit_card_city] &&
-    params[:credit_card_state] &&
-    params[:credit_card_zip]
+    params[:credit_card_address].present? &&
+    params[:credit_card_city].present? &&
+    params[:credit_card_state].present? &&
+    params[:credit_card_zip].present?
   end
   
 end
