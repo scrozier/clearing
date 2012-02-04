@@ -16,6 +16,7 @@ Clearing::Application.routes.draw do
     match 'enter_walkups/:id' => 'miscellaneous#enter_walkups', :as => :enter_walkups
     match 'add_walkup' => 'miscellaneous#add_walkup'
     match 'create_patron_csv' => 'miscellaneous#create_patron_csv'
+    match 'sustaining_donations' => 'reports#sustaining_donations'
   end
   
   match 'concerts/intro' => 'concerts#intro', :as => :concerts_intro

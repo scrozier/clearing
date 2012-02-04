@@ -1,0 +1,25 @@
+%h1 Sustaining donations
+- num_donations = 0
+- total_donations = BigDecimal.new('0')
+%table
+  %thead
+    %tr
+      %th Patron
+      %th{:style => 'text-align:right'} Donation
+      %th Email
+  %tbody
+  - for donation in Donation.includes(:patron).where(:reservation_id => nil).order('patrons.last_name, patrons.first_name')
+    - patron = donation.patron
+    - num_donations += 1
+    - total_donations += donation.amount
+    %tr
+      %td= "#{patron.first_name} #{patron.last_name}"
+      %td{:style => 'text-align:right'}= donation ? donation.amount.to_dollar_amount : ''
+      %td= patron.email
+  %tr
+    %td
+      %h1 Totals
+    %td{:style => 'text-align:right'}
+      %h1= total_donations.to_dollar_amount
+    %td
+      %h1= num_donations

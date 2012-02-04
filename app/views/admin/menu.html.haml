@@ -14,3 +14,4 @@
         %p= link_to "#{concert.name}, #{pretty_date(concert.date_and_time)}", admin_memorials_report_path(concert.id)
       %h2 Other
       %p= link_to 'Export mailing list', admin_create_patron_csv_path
+      %p= link_to 'Sustaining donations', admin_sustaining_donations_path
