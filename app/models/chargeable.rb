@@ -60,7 +60,7 @@ module Chargeable
     if @make_donation
 
       unless @donation.card_valid?
-        flash.now[:error] = 'Invalid credit card information.' + object_errors(@donation)
+        flash.now[:error] = 'Invalid credit card information.'
         render :action => :show
         return
       end
@@ -127,7 +127,7 @@ module Chargeable
     success, message = @donation.process_payment
     
     unless success
-      flash.now[:error] = 'Credit card transaction could not be processed: ' + message + contact_us
+      flash[:error] = 'Credit card transaction could not be processed: ' + message + contact_us
       if @concert
         redirect_to show_ticket_form_path(@concert.ident_string) and return
       else
