@@ -41,7 +41,7 @@ class Donation < ActiveRecord::Base
       :type => @credit_card_type,
       )
     return true if @credit_card.valid?
-    @credit_card.errors.full_messages{|m| errors.add_to_base(m)
+    @credit_card.errors.full_messages{|m| errors.add_to_base(m)}
   end
 
   def name_and_address
