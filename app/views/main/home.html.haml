@@ -1,14 +1,15 @@
-- if todays_date :is_between => Date.new(2012, 2, 1), :and => Date.new(2016, 10, 15)
-  .row
-    .span16.columns
-      - unless flash.empty?
-        .alert-message.error
-          = display_flash
-      .alert-message.news
-        %p
-          = link_to '<span class="label success">SUPPORT THIS CONCERT SERIES</span>'.html_safe, donate_path
-          Make a general donation to Concerts in the Clearing today. Keep the quality music coming.
-          = link_to 'Click here.', donate_path
+.row
+  .span16.columns
+    - unless flash.empty?
+      .alert-message.error
+        = display_flash
+    .alert-message.news
+      %p
+        = link_to '<span class="label success">SUPPORT THIS CONCERT SERIES</span>'.html_safe, donate_path
+        Make a general donation to Concerts in the Clearing today. Keep the quality music coming.
+        = link_to 'Click here.', donate_path
+      - if todays_date :is_between => Date.new(2011, 2, 1), :and => Date.new(2011, 10, 15)
+        / some time-sensitive news
 .row
   .span4.columns
     .home-concert
