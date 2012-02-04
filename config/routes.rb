@@ -6,6 +6,7 @@ Clearing::Application.routes.draw do
   match 'donate' => 'donations#show'
   match 'confirm_donation' => 'donations#reserve_and_donate'
   match 'process_non_concert_donation' => 'donations#process_donation'
+  
   match 'static_jpg_image/:image_name' => 'main#static_image'
   
   namespace :admin do

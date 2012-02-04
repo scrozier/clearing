@@ -128,8 +128,11 @@ module Chargeable
     
     unless success
       flash.now[:error] = 'Credit card transaction could not be processed: ' + message + contact_us
-      redirect_to root_path
-      return
+      if @concert
+        redirect_to show_ticket_form_path(@concert.ident_string) and return
+      else
+        redirect_to donate_path and return
+      end
     end
 
     @donation.save!
