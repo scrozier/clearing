@@ -1,0 +1,51 @@
+.row
+  .span10.offset3
+    - unless flash.empty?
+      .alert-message.error
+        = display_flash
+    %h1 Almost done - confirm your donation below
+    - if @includes_reservation
+      = render 'tickets_have_been_reserved'
+    %h1 Confirm donation
+    %table
+      %tr
+        %td Credit card type
+        %td= @donation.credit_card_type.upcase
+      %tr
+        %td Credit card number
+        %td= @donation.credit_card_number
+      %tr
+        %td Credit card expiration
+        %td= "#{@donation.credit_card_expiration_month}/#{@donation.credit_card_expiration_year}"
+      %tr
+        %td Credit card verification
+        %td= @donation.credit_card_verification
+      %tr
+        %td Name on card
+        %td= "#{@donation.credit_card_first_name} #{@donation.credit_card_last_name}"
+      %tr
+        %td Billing address
+        %td= raw "#{@donation.credit_card_address}<br />#{@donation.credit_card_city} #{@donation.credit_card_state} #{@donation.credit_card_zip}"
+      %tr
+        %td Amount
+        %td= dollar_amount(@donation.amount)
+    = form_tag process_donation_path do
+      = hidden_field_tag :patron_id, @patron.id
+      - if @concert
+        = hidden_field_tag :concert_id, @concert.id
+        = hidden_field_tag :reservation_id, @reservation.id
+      = hidden_field_tag :credit_card_type, @donation.credit_card_type
+      = hidden_field_tag :credit_card_number, @donation.credit_card_number
+      = hidden_field_tag :credit_card_expiration_month, @donation.credit_card_expiration_month
+      = hidden_field_tag :credit_card_expiration_year, @donation.credit_card_expiration_year
+      = hidden_field_tag :credit_card_verification, @donation.credit_card_verification
+      = hidden_field_tag :credit_card_first_name, @donation.credit_card_first_name
+      = hidden_field_tag :credit_card_last_name, @donation.credit_card_last_name
+      = hidden_field_tag :credit_card_address, @donation.credit_card_address
+      = hidden_field_tag :credit_card_city, @donation.credit_card_city
+      = hidden_field_tag :credit_card_state, @donation.credit_card_state
+      = hidden_field_tag :credit_card_zip, @donation.credit_card_zip
+      = hidden_field_tag :amount, @donation.amount
+      .actions
+        = submit_tag 'Process donation', :class => 'btn primary'
+        = link_to 'Cancel', root_path, :class => 'btn'

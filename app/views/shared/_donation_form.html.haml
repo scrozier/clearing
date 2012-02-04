@@ -1,0 +1,26 @@
+#donation
+  %legend Donation information
+  .clearfix
+  = label_tag :credit_card_type
+  .input
+    = select_tag :credit_card_type, options_for_select([[], ["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"]], @donation.credit_card_type), :class => 'span3'
+  = app_text_field_tag :credit_card_number, nil, 3, @donation.credit_card_number
+  = label_tag :credit_card_expiration_year, 'Card expiration'
+  .input
+    = select_tag :credit_card_expiration_month, options_for_card_expiration_month(@donation.credit_card_expiration_month), :class => 'span3'
+    = select_tag :credit_card_expiration_year, options_for_card_expiration_year(@donation.credit_card_expiration_year), :class => 'span2'
+  = app_text_field_tag :credit_card_verification, 'Card verification value (CVV)', 1, @donation.credit_card_verification
+  .clearfix
+    = label_tag :credit_card_first_name, 'Name on card (first, last)'
+    .input
+      = text_field_tag :credit_card_first_name, @donation.credit_card_first_name, :class => "span3"
+      = text_field_tag :credit_card_last_name, @donation.credit_card_last_name, :class => "span3"
+  = app_text_field_tag :credit_card_address, 'Credit card billing address (required)', 5, @donation.credit_card_address
+  .clearfix
+    = label_tag :credit_card_city, '(city, state, zip)'
+    .input
+      = text_field_tag :credit_card_city, @donation.credit_card_city, :class => "span3"
+      = text_field_tag :credit_card_state, @donation.credit_card_state, :class => "span1"
+      = text_field_tag :credit_card_zip, @donation.credit_card_zip, :class => "span2"
+  .clearfix
+  = app_text_field_tag :amount, nil, 2, @donation.amount

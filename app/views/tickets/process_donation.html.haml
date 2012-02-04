@@ -1,9 +1,1 @@
-.row
-  .span10.offset3
-    - unless flash.empty?
-      .alert-message.error
-        = display_flash
-    %h1 Thank you
-    %p Donations like yours help us continue to provide great music.
-    %p You will receive an email confirmation of your donation shortly.
-    %p= link_to('Return to home page', root_path) + '.'
+= render :partial => 'shared/process_donation'

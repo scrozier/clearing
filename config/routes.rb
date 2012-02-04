@@ -3,6 +3,9 @@ Clearing::Application.routes.draw do
   root :to => 'main#home'
   match 'about' => 'main#about', :as => :about
   match 'contact_us' => 'main#contact_us', :as => :contact_us
+  match 'donate' => 'donations#show'
+  match 'confirm_donation' => 'donations#reserve_and_donate'
+  match 'process_non_concert_donation' => 'donations#process_donation'
   match 'static_jpg_image/:image_name' => 'main#static_image'
   
   namespace :admin do
@@ -19,7 +22,7 @@ Clearing::Application.routes.draw do
   match 'concerts/print/:ident_string' => 'concerts#print'
   
   match 'show_ticket_form/:ident_string' => 'tickets#show', :as => :show_ticket_form
-  match 'reserve_tickets' => 'tickets#reserve', :as => :reserve_tickets
+  match 'reserve_tickets' => 'tickets#reserve_and_donate', :as => :reserve_tickets
   match 'ticket_success'  => 'tickets#success', :as => :ticket_success
   match 'process_donation'  => 'tickets#process_donation', :as => :process_donation
   match 'print_tickets/:unique_token'   => 'tickets#print',   :as => :print_tickets

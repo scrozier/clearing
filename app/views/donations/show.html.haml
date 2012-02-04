@@ -1,0 +1,36 @@
+- @patron ||= Patron.new
+- @donation ||= Donation.new
+.row
+  .span10.offset3
+    - unless flash.empty?
+      .alert-message.error
+        = display_flash
+    %h1 Donate
+    %p Use this form to make a general donation to Concerts in the Clearing.
+    %p
+      Your donation helps to sustain our mission of quality music and makes concert attendance
+      possible for those who may not be able to pay.
+    %p Thank you.
+
+    = form_tag confirm_donation_path do
+      = hidden_field_tag :concert_id, ''
+      %fieldset
+        .alert-message.news{:style => 'margin-top:1.0em'}
+          = app_text_field_tag :first_name, nil, 3, @patron.first_name
+          = app_text_field_tag :last_name, nil, 3, @patron.last_name
+          = app_text_field_tag :email, nil, 6, (@patron.errors[:email].empty? ? @patron.email : nil)
+          = app_text_field_tag :email_confirmation, 'Re-type email', 6, (@patron.errors[:email].empty? ? @patron.email : nil)
+
+          = render :partial => 'shared/donation_form'
+
+      .actions
+        = submit_tag 'Donate', :class => 'btn primary'
+
+:javascript
+  $(document).ready(function(){
+
+    var amtField = $('input[name=amount]');
+    amtField.blur(function(){
+      $(this).val(to_dollar_amount($(this).val()));
+    });
+  });
