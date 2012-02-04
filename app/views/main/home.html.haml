@@ -1,4 +1,4 @@
-- if todays_date :is_between => Date.new(2011, 10, 15), :and => Date.new(2011, 10, 15)
+- if todays_date :is_between => Date.new(2012, 2, 1), :and => Date.new(2016, 10, 15)
   .row
     .span16.columns
       - unless flash.empty?
@@ -6,9 +6,9 @@
           = display_flash
       .alert-message.news
         %p
-          %span.label.success TICKETS STILL AVAILABLE
-          Tickets are still available for Peter Mayer <strong>tonight</strong>. Reserve your tickets below, or come
-          to the tickets table tonight by 7:45pm.
+          = link_to '<span class="label success">SUPPORT THIS CONCERT SERIES</span>'.html_safe, donate_path
+          Make a general donation to Concerts in the Clearing today. Keep the quality music coming.
+          = link_to 'Click here.', donate_path
 .row
   .span4.columns
     .home-concert
