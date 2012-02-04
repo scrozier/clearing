@@ -40,7 +40,8 @@ class Donation < ActiveRecord::Base
       :verification_value => @credit_card_verification,
       :type => @credit_card_type,
       )
-    @credit_card.valid?
+    return true if @credit_card.valid?
+    errors.add_to_base(object_errors(@credit_card))
   end
 
   def name_and_address

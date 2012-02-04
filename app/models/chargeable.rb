@@ -60,7 +60,7 @@ module Chargeable
     if @make_donation
 
       unless @donation.card_valid?
-        flash.now[:error] = 'Invalid credit card information.'
+        flash.now[:error] = 'Invalid credit card information.' + object_errors(@donation)
         render :action => :show
         return
       end
