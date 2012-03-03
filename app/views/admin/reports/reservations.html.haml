@@ -18,7 +18,10 @@
     - total_tickets += reservation.number_of_tickets if reservation.number_of_tickets
     - total_donations += donation.amount if donation
     %tr
-      %td= "#{patron.first_name} #{patron.last_name}"
+      %td{:style => 'vertical-align:baseline'}
+        %span{:style => 'font-size:2.0em; font-weight:bold'}
+          = patron.last_name
+        = patron.first_name
       %td{:style => 'text-align:right'}= reservation.number_of_tickets
       %td{:style => 'text-align:right'}= donation ? donation.amount.to_dollar_amount : ''
       %td= patron.email
