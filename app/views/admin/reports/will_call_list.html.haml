@@ -1,0 +1,24 @@
+%h1 Reservations
+- total_tickets = 0
+- total_donations = BigDecimal.new('0')
+%h2= @concert.name
+%table
+  %thead
+    %tr
+      %th Patron
+      %th{:style => 'text-align:right'} Tickets
+  %tbody
+  - for reservation in @concert.reservations.includes(:patron).order('patrons.last_name, patrons.first_name')
+    - patron = reservation.patron
+    - total_tickets += reservation.number_of_tickets if reservation.number_of_tickets
+    %tr
+      %td{:style => 'vertical-align:baseline'}
+        %span{:style => 'font-size:2.0em; font-weight:bold'}
+          = patron.pretty_last_name
+        = patron.first_name
+      %td{:style => 'text-align:right'}= reservation.number_of_tickets
+  %tr
+    %td
+      %h1 Totals
+    %td{:style => 'text-align:right'}
+      %h1= total_tickets

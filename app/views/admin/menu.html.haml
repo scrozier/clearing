@@ -6,6 +6,9 @@
       %h2 Reservations by concert
       - for concert in Concert.order(:date_and_time).all
         %p= link_to "#{concert.name}, #{pretty_date(concert.date_and_time)}", admin_reservations_report_path(concert.id)
+      %h2 Will call list by concert
+      - for concert in Concert.order(:date_and_time).all
+        %p= link_to "#{concert.name}, #{pretty_date(concert.date_and_time)}", admin_will_call_list_path(concert.id)
       %h2 Enter walk-up patrons
       - for concert in Concert.order(:date_and_time).all
         %p= link_to "#{concert.name}, #{pretty_date(concert.date_and_time)}", admin_enter_walkups_path(concert.id)
