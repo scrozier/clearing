@@ -12,4 +12,12 @@ class Patron < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
   
+  def pretty_last_name
+    # is it hyphenated?
+    hyphenated = last_name.index(/-/)
+    pln = last_name.titleize
+    pln[hyphenated] = '-' if hyphenated
+    pln
+  end
+  
 end
