@@ -69,7 +69,7 @@ module ApplicationHelper
   end
   
   def todays_date(args)
-    Date.today >= args[:is_between] && Date.today <= args[:and]
+    Date.today >= Date.parse(args[:is_between]) && Date.today <= Date.parse(args[:and])
   end
 
 end
