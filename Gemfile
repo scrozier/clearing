@@ -7,6 +7,10 @@ gem 'pry', :group => :development
 gem 'less', :group => :development
 gem 'activemerchant', :require => 'active_merchant'
 
+group :development do
+  gem 'therubyracer'
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

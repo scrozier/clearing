@@ -2405,6 +2405,7 @@ ul.pills.concert-nav li span.concert-date {
 .home-concert h1 {
   font-size: 1.8em;
   line-height: 1.0em;
+  margin-bottom: 5px;
 }
 .home-concert h2 {
   font-size: 1.0em;
@@ -2420,7 +2421,7 @@ ul.pills.concert-nav li span.concert-date {
   top: 300px;
 }
 .home-concert .tickets {
-  margin: -10px 0 7px 0;
+  margin: -5px 0 0 0;
 }
 .current {
   background-color: #ffc40d;

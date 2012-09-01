@@ -13,56 +13,52 @@
 .row
   .span4.columns
     .home-concert
-      %h2 Saturday, October 15, 2011<br />8:00pm
-      %h3 singer/songwriter
-      %h1 Peter Mayer
+      %h2 Saturday, October 27, 2012<br />7:00pm
       .tickets
-        - if todays_date :is_between => '2011-09-15', :and => '2011-10-16'
-          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'mayer_2011')
+        - if todays_date :is_between => '2012-09-01', :and => '2012-10-27'
+          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'concert1')
         - else
           = link_to '<span class="label success">CHECK OUT OUR OTHER CONCERTS</span>'.html_safe, root_path
-      %p "Peter does nothing less than address the very nature of our existence." &mdash;Dale Connelly, Minnesota Public Radio
-      %p "If I rocked half as hard as Peter does, I'd own the world by now." &mdash;Janis Ian
-      = image_tag 'mayer-graphic-home-page-white.jpg', :class => 'artist-graphic'
+      %h3 young artists
+      %h1 Rising Stars
+      %p Some call these young people child prodigies. We call them rising stars.
+      %p Come be awed by their gifts and early achievements, and inspired by their compelling musicianship.
+      = image_tag 'concert1-graphic-home-page-white.jpg', :class => 'artist-graphic'
   .span4.columns
     .home-concert
-      %h2 Sunday, November 13, 2011<br />7:00pm
+      %h2 Sunday, November 18, 2012<br />7:00pm
+      .tickets
+        - if todays_date :is_between => '2012-09-01', :and => '2012-11-18'
+          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'concert2')
+        - else
+          = link_to '<span class="label success">CHECK OUT OUR OTHER CONCERTS</span>'.html_safe, root_path
+      %h3 jazz vocals
+      %h1 UNT Jazz Singers
+      %p Twelve superb singers, a four-piece rhythm section, and director and well known vocalist Jennifer Barnes come together for an exciting and stimulating program.
+      = image_tag 'concert2-graphic-home-page-white.jpg', :class => 'artist-graphic'
+  .span4.columns
+    .home-concert
+      %h2 Sunday, February 24, 2013<br />7:00pm
+      .tickets
+        - if todays_date :is_between => '2012-09-01', :and => '2013-02-24'
+          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'concert3')
+        - else
+          = link_to '<span class="label success">CHECK OUT OUR OTHER CONCERTS</span>'.html_safe, root_path
       %h3 choir and orchestra
       %h1 Masterworks
-      .tickets
-        - if todays_date :is_between => '2011-10-14', :and => '2011-11-13'
-          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'memorial_2011')
-        - else
-          = link_to '<span class="label success">CHECK OUT OUR OTHER CONCERTS</span>'.html_safe, root_path
-      %p The evening opens with Beethoven's joyful String Quartet, Opus 18, No. 2.
-      %p Then, the choir joins the orchestra in Maurice Durufl&eacute;'s lush, dramatic <i>Requiem</i>, a 20th century masterpiece.
-      = image_tag 'masterworks-graphic-home-page-white.jpg', :class => 'artist-graphic'
+      %p A program which will be both joyful and exuberant, calm and serene.
+      %p Morten Lauridsen’s “Lux Aeterna” for choir and orchestra will be featured, as will “Exsultate Jubilate,” Mozart’s cantata for soprano and orchestra.
+      = image_tag 'concert3-graphic-home-page-white.jpg', :class => 'artist-graphic'
   .span4.columns
     .home-concert
-      %h2 Saturday, March 3, 2012<br />8:00pm
-      %h3 flute, marimba, and more
-      %h1 Helen Blackburn
+      %h2 Sunday, April 21, 2013<br />7:00pm
       .tickets
-        - if todays_date :is_between => '2011-11-14', :and => '2012-03-03'
-          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'helen_2011')
+        - if todays_date :is_between => '2012-09-01', :and => '2013-04-21'
+          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'concert4')
         - else
           = link_to '<span class="label success">CHECK OUT OUR OTHER CONCERTS</span>'.html_safe, root_path
-      %p An eclectic, exciting performance by flute virtuoso Helen Blackburn, her husband, marimbist Drew Lang, and perhaps some other great musical surprises.
-      %p You'll just have to come and see.
-      = image_tag 'helen-graphic-home-page-white.jpg', :class => 'artist-graphic'
-  .span4.columns
-    .home-concert.current
-      %h2 Saturday, April 14, 2012<br />8:00pm
-      %h3 big band and percussion
-      %h1 UNT Latin Jazz
-      .tickets
-        - if todays_date :is_between => '2012-03-04', :and => '2012-04-14'
-          = link_to '<span class="label success">RESERVE TICKETS</span>'.html_safe, show_ticket_form_path(:ident_string => 'latin_2011')
-        - else
-          - if Date.today > Date.new(2012, 4, 14)
-            = link_to '<span class="label success">CHECK OUT OUR OTHER CONCERTS</span>'.html_safe, root_path
-          - else
-            <span class='label success'>TICKETS AVAILABLE MARCH 4</span>
-      %p End the season with exciting music from south of the border with University of North Texas' Latin Jazz Ensemble.
-      %p A "mini big band" with an exciting, expanded percussion section, this group will have the whole family salsa dancing.
-      = image_tag 'latin-graphic-home-page.jpg', :class => 'artist-graphic'
+      %h3 world music
+      %h1 Meadows World Music Ensemble
+      %p This ensemble explores and performs music from cultures and continents around the world.
+      %p Get ready for hot drumming and imaginative improvisation!
+      = image_tag 'concert4-graphic-home-page-white.jpg', :class => 'artist-graphic'
