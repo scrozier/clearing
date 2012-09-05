@@ -13,7 +13,7 @@
       - for concert in Concert.order(:date_and_time).all
         %p= link_to "#{concert.name}, #{pretty_date(concert.date_and_time)}", admin_enter_walkups_path(concert.id)
       %h2 Memorials report
-      - for concert in Concert.where(:ident_string => 'memorial_2011').order(:date_and_time).all
+      - for concert in Concert.where(:ident_string => 'concert3').order(:date_and_time).all
         %p= link_to "#{concert.name}, #{pretty_date(concert.date_and_time)}", admin_memorials_report_path(concert.id)
       %h2 Other
       %p= link_to 'Export mailing list', admin_create_patron_csv_path

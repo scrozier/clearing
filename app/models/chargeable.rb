@@ -119,7 +119,7 @@ module Chargeable
     fill_credit_card_info_from_params
 
     unless @donation.card_valid?
-        flash.now[:error] = 'Credit card transaction could not be processed: ' + message + contact_us
+        flash.now[:error] = 'Credit card transaction could not be processed: ' + message + '. ' + contact_us
         redirect_to root_path
         return
       end
@@ -127,8 +127,8 @@ module Chargeable
     success, message = @donation.process_payment
     
     unless success
-      flash[:error] = 'Credit card transaction could not be processed: ' + message + contact_us
-      if @concert
+      flash[:error] = 'Credit card transaction could not be processed: ' + message + '. ' + contact_us
+      if params[:concert_id]
         redirect_to show_ticket_form_path(@concert.ident_string) and return
       else
         redirect_to donate_path and return
